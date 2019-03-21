@@ -10,5 +10,9 @@ package proto1c;
  * @author Josh
  */
 public class manager_Reminder {
-    
+    private String name;
+    private int date;
+    private int time;
+    private String location;
+    private String description;
 }
