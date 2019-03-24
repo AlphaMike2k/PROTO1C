@@ -22,6 +22,8 @@ public class mediator {
     }
     
     public void startMediator() {
-        
+        userClient.changeInterface("main");
+        //userClient.displayCalendar(calendarManager.getNumDays());
+        calendarManager.getFirstDay();
     }
 }
