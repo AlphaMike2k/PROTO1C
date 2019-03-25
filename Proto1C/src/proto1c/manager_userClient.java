@@ -1,4 +1,5 @@
 package proto1c;
+import java.util.*;
 
 /**
  *
@@ -19,8 +20,8 @@ public class manager_userClient {
         }
     }
     
-    public void displayCalendar(int monthToDisplay) {
-        
+    public void displayCalendar(int monthToDisplay, String month, int startDay) {
+        mainInterface.setCalendar(monthToDisplay,month,startDay);
     }
     
     public void displayAlert() {

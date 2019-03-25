@@ -1,5 +1,5 @@
 package proto1c;
-
+import java.time.*;
 /**
  *
  * @author Josh
@@ -37,21 +37,14 @@ public class gui_Main extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         userCalendar.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         userCalendar.setName("userCalendar"); // NOI18N
         jScrollPane1.setViewportView(userCalendar);
 
+        lblMonth.setAlignment(java.awt.Label.CENTER);
         lblMonth.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblMonth.setText("label1");
 
@@ -60,14 +53,11 @@ public class gui_Main extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(316, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                    .addComponent(lblMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,8 +65,8 @@ public class gui_Main extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(lblMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -86,7 +76,7 @@ public class gui_Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +90,35 @@ public class gui_Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setUpCalendar() {
-        userCalendar.setRowHeight(40);
+        userCalendar.setRowHeight(59);
+    }
+    
+    public void setCalendar(int numDays, String month, int firstDay) {
+        int day = 1;
+        
+        lblMonth.setText(month);
+        
+        for (int j = 0; j<7; j++) {
+            if (firstDay+j > 7) {
+                firstDay = ((firstDay -j) - 2*(firstDay -j));
+            }
+            userCalendar.getColumnModel().getColumn(j).setHeaderValue(DayOfWeek.of(firstDay + j).name());
+            repaint();
+            System.out.println(DayOfWeek.of(firstDay + j).name());
+        }
+        
+        for (int i = 0; i<5; i++) {
+            for (int k = 0; k<7; k++) {
+                if (day <= numDays) {
+                    userCalendar.setValueAt(day, i, k);
+                    day ++;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
