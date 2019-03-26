@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 public class manager_Calendar {
     private static Calendar currentCalendar = Calendar.getInstance();
     private static Calendar modCalendar = Calendar.getInstance();
+    private int guiMonth;
     private int currentDay;
     private int currentMonth;
     private int currentYear;
@@ -18,6 +19,7 @@ public class manager_Calendar {
     currentDay = currentCalendar.get(Calendar.DATE);
     currentMonth = currentCalendar.get(Calendar.MONTH) +1;
     currentYear = currentCalendar.get(Calendar.YEAR);
+    guiMonth = currentMonth;
     
     //System.out.println(currentCalendar.getTime());
     //System.out.println(currentCalendar.get(Calendar.DATE));
@@ -25,9 +27,9 @@ public class manager_Calendar {
     //System.out.println("Here:" + " " + day + " " + (month +1) + " " + year);
     //System.out.print(yearMonth);
     //System.out.print(yearMonth.lengthOfMonth());
-    System.out.println(currentDay);
-    System.out.println(currentMonth);
-    System.out.println(currentYear);
+    //System.out.println(currentDay);
+    //System.out.println(currentMonth);
+    //System.out.println(currentYear);
     }
     
     public int getNumDays(int month) {
@@ -55,6 +57,16 @@ public class manager_Calendar {
 
     public int getCurrentYear() {
         return currentYear;
+    }
+
+    public int getGuiMonth() {
+        //System.out.println(guiMonth);
+        return guiMonth;
+    }
+
+    public void setGuiMonth(int guiMonth) {
+        this.guiMonth = guiMonth;
+        //System.out.println(guiMonth);
     }
     
     
