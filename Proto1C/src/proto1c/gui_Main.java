@@ -3,11 +3,15 @@ import java.time.*;
 import java.math.*;
 /**
  *
- * @author Josh
+ * @author UP820734
  */
 public class gui_Main extends javax.swing.JFrame {
     private manager_userClient userClientParent;
     
+    /**
+     * The main GUI the user interacts with
+     * @param userClient the parent of the GUI
+     */
     public gui_Main(manager_userClient userClient) {
         userClientParent = userClient;
         
@@ -126,22 +130,40 @@ public class gui_Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Triggers method in parent that user has pressed 'Next' button
+     * @param evt press event
+     */
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         userClientParent.nextMonth();
     }//GEN-LAST:event_btnNextActionPerformed
-
+    
+    /**
+     * Triggers method in parent that user has pressed 'Previous' button
+     * @param evt press event
+     */
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         userClientParent.prevMonth();
     }//GEN-LAST:event_btnPrevActionPerformed
-
+    
+    /**
+     * Specifies calender properties
+     */
     private void setUpCalendar() {
         userCalendar.setRowHeight(59);
     }
     
-    public void setCalendar(int numDays, String month, int firstDay) {
+    /**
+     * Sets values the calendar displays
+     * @param numDays the number of days in the month
+     * @param month the String value of the month
+     * @param firstDay what day the 1st of the month is on
+     * @param year the int value of the year
+     */
+    public void setCalendar(int numDays, String month, int firstDay, int year) {
         int day = 1;
         
-        lblMonth.setText(month);
+        lblMonth.setText(month + " " + year);
         
         for (int i = 0; i<5; i++) {
             for (int k = 0; k<7; k++) {
