@@ -18,7 +18,7 @@ public class manager_Reminder {
     private String reminderDescription;
 
 
-public manager_Reminder(String name, int day, int month, int year, int hour, int minute,String location, String description){
+public void manager_Reminder(String name, int day, int month, int year, int hour, int minute,String location, String description){
     name = reminderName;
     day =  reminderDay;
     month = reminderMonth;
