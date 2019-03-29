@@ -12,12 +12,12 @@ package proto1c;
 public class manager_Budget {
     private double budget;
     private double expense;
-    
-    
-public manager_Budget(double monthlyBudget, double monthlyExpense){
+
+
+public void manager_Budget(double monthlyBudget, double monthlyExpense){
     monthlyBudget = budget;
     monthlyExpense = expense;
-}    
+}
 
 public double getBudget(double budget){
     return budget;
@@ -41,4 +41,3 @@ public double getDailyBudget(double dailyBudget){
 }
 
 }
-
