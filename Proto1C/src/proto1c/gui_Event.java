@@ -258,105 +258,55 @@ public class gui_Event extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Edit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit1ActionPerformed
-        // TODO add your handling code here:
         gui_Eventedit a = new gui_Eventedit();
         a.setVisible(true);
     }//GEN-LAST:event_Edit1ActionPerformed
 
     private void Edit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit2ActionPerformed
-        // TODO add your handling code here:
         gui_Eventedit b = new gui_Eventedit();
         b.setVisible(true);
     }//GEN-LAST:event_Edit2ActionPerformed
    
-    
-    
-    
-    
-    
-    
-    
     private void Del1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del1ActionPerformed
         gui_EventDel f = new gui_EventDel();
         f.setVisible(true);
     }//GEN-LAST:event_Del1ActionPerformed
 
     private void Del2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del2ActionPerformed
-        // TODO add your handling code here:
         gui_EventDel g = new gui_EventDel();
         g.setVisible(true);
     }//GEN-LAST:event_Del2ActionPerformed
 
     private void Del3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del3ActionPerformed
-        // TODO add your handling code here:
         gui_EventDel h = new gui_EventDel();
         h.setVisible(true);
     }//GEN-LAST:event_Del3ActionPerformed
 
     private void Del4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del4ActionPerformed
-        // TODO add your handling code here:
         gui_EventDel i = new gui_EventDel();
         i.setVisible(true);
     }//GEN-LAST:event_Del4ActionPerformed
 
     private void Del5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del5ActionPerformed
-        // TODO add your handling code here:
         gui_EventDel j = new gui_EventDel();
         j.setVisible(true);
     }//GEN-LAST:event_Del5ActionPerformed
 
     private void Edit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit3ActionPerformed
-        // TODO add your handling code here:
         gui_Eventedit c = new gui_Eventedit();
         c.setVisible(true);
     }//GEN-LAST:event_Edit3ActionPerformed
 
     private void Edit4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit4ActionPerformed
-        // TODO add your handling code here:
         gui_Eventedit d = new gui_Eventedit();
         d.setVisible(true);
     }//GEN-LAST:event_Edit4ActionPerformed
 
     private void Edit5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit5ActionPerformed
-        // TODO add your handling code here:
         gui_Eventedit e = new gui_Eventedit();
         e.setVisible(true);
     }//GEN-LAST:event_Edit5ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(gui_Event.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(gui_Event.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(gui_Event.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(gui_Event.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new gui_Event().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Del1;

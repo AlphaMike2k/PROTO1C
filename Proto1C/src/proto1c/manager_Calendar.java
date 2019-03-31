@@ -25,16 +25,6 @@ public class manager_Calendar {
     currentYear = currentCalendar.get(Calendar.YEAR);
     guiMonth = currentMonth;
     guiYear = currentYear;
-    
-    //System.out.println(currentCalendar.getTime());
-    //System.out.println(currentCalendar.get(Calendar.DATE));
-    //System.out.println(currentCalendar.get(Calendar.DAY_OF_WEEK));
-    //System.out.println("Here:" + " " + day + " " + (month +1) + " " + year);
-    //System.out.print(yearMonth);
-    //System.out.print(yearMonth.lengthOfMonth());
-    //System.out.println(currentDay);
-    //System.out.println(currentMonth);
-    //System.out.println(currentYear);
     }
     
     /**
@@ -55,7 +45,6 @@ public class manager_Calendar {
      */
     public int getFirstDay (int month, int year) {
         modCalendar.set(year, month -1, 1);
-        //System.out.println(dayFormat.format(modCalendar.getTime()));
         return Integer.valueOf(dayFormat.format(modCalendar.getTime()));
     }
     
@@ -97,10 +86,13 @@ public class manager_Calendar {
      * @return int of guiMonth
      */
     public int getGuiMonth() {
-        //System.out.println(guiMonth);
         return guiMonth;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public LocalDate getCurrentDate() {
         return LocalDate.of(currentYear,currentMonth,currentDay);
     }
@@ -119,7 +111,6 @@ public class manager_Calendar {
             setGuiYear(getGuiYear() - 1);
             this.guiMonth = 12;
         }
-        //System.out.println(guiMonth);
     }
     
     /**

@@ -16,7 +16,7 @@ public class manager_userClient {
     private String sqlString;
     private ResultSet dbResults;
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
     
     /**
      * Creates and controls all the GUIs
@@ -53,18 +53,30 @@ public class manager_userClient {
         mainInterface.setCalendar(monthToDisplay,month,startDay,yearToDisplay);
     }
     
+    /**
+     * 
+     * @param date 
+     */
     public void displayTasks(LocalDate date) {
         sqlString = "SELECT * FROM Task;";
         dbResults = getData(sqlString);
         mainInterface.setTasks(formatData(dbResults, date,"TaskDateTime","TaskName"));
     }
     
+    /**
+     * 
+     * @param date 
+     */
     public void displayReminders(LocalDate date) {
         sqlString = "SELECT * FROM Reminder;";
         dbResults = getData(sqlString);
         mainInterface.setReminders(formatData(dbResults, date,"RemDateTime","RemName"));
     }
     
+    /**
+     * 
+     * @param date 
+     */
     public void displayEvents(LocalDate date) {
         sqlString = "SELECT * FROM Event;";
         dbResults = getData(sqlString);
@@ -85,21 +97,24 @@ public class manager_userClient {
         mediatorParent.buttonPressed("guiMainPrev",0);
     }
     
+    /**
+     * 
+     * @param clickedDay 
+     */
     public void calendarClicked(int clickedDay) {
         mediatorParent.buttonPressed("calendarClicked", clickedDay);
     }
     
+    /**
+     * 
+     * @param sql
+     * @return 
+     */
     private ResultSet getData(String sql) {
         try{
             Statement st = dbConnection.createStatement();
             ResultSet resultData = st.executeQuery(sql);
-            /*
-            *    while (test.next() ) {
-            *    System.out.println(test.getInt("EveID"));
-            *    System.out.println(test.getString("EveName"));
-            *}
-            *System.out.println("Test");
-            */
+            
             return resultData; 
         }
         
@@ -109,9 +124,16 @@ public class manager_userClient {
         return null;
     }
     
+    /**
+     * 
+     * @param data
+     * @param date
+     * @param colName
+     * @param colName2
+     * @return 
+     */
     private ArrayList <type_TableRow> formatData(ResultSet data, LocalDate date, String colName, String colName2) {
         LocalDate dsDate;
-        String dsString;
         ArrayList <Timestamp> dsDatesList = new ArrayList<Timestamp>();
         ArrayList <String> dsStringList = new ArrayList<String>();
         ArrayList<type_TableRow> tableRows= new ArrayList<type_TableRow>();
@@ -119,7 +141,6 @@ public class manager_userClient {
         try{
             while (data.next()) {
                 dsDate = data.getDate(colName).toLocalDate();
-                dsString = data.getString(colName2);
                 if (dsDate.equals(date)) {
                     dsDatesList.add(data.getTimestamp(colName));
                     dsStringList.add(data.getString(colName2));
@@ -155,6 +176,7 @@ public class manager_userClient {
         } 
         return null;
     }
+    
     
     public void displayAlert() {
         
