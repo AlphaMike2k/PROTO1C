@@ -101,6 +101,10 @@ public class manager_Calendar {
         return guiMonth;
     }
     
+    public LocalDate getCurrentDate() {
+        return LocalDate.of(currentYear,currentMonth,currentDay);
+    }
+    
     /**
      * Sets the guiMonth variable and changes guiYear variable if applicable
      * @param guiMonth the new specified month
