@@ -5,6 +5,8 @@
  */
 package proto1c;
 
+
+
 /**
  *
  * @author Michael
@@ -38,8 +40,8 @@ public class gui_EventDel extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jDialog4 = new javax.swing.JDialog();
         jDialog5 = new javax.swing.JDialog();
-        btn2 = new javax.swing.JButton();
-        btn1 = new javax.swing.JButton();
+        del_cancel = new javax.swing.JButton();
+        del_confirm = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -105,12 +107,17 @@ public class gui_EventDel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btn2.setText("No, Cancel");
-
-        btn1.setText("Yes, Delete");
-        btn1.addActionListener(new java.awt.event.ActionListener() {
+        del_cancel.setText("No, Cancel");
+        del_cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn1ActionPerformed(evt);
+                del_cancelActionPerformed(evt);
+            }
+        });
+
+        del_confirm.setText("Yes, Delete");
+        del_confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                del_confirmActionPerformed(evt);
             }
         });
 
@@ -122,9 +129,9 @@ public class gui_EventDel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(100, 100, 100)
-                .addComponent(btn1)
+                .addComponent(del_confirm)
                 .addGap(31, 31, 31)
-                .addComponent(btn2)
+                .addComponent(del_cancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
@@ -138,17 +145,21 @@ public class gui_EventDel extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn2)
-                    .addComponent(btn1))
-                .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(del_cancel)
+                    .addComponent(del_confirm))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+    private void del_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_del_confirmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn1ActionPerformed
+    }//GEN-LAST:event_del_confirmActionPerformed
+
+    private void del_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_del_cancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_del_cancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,8 +197,8 @@ public class gui_EventDel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn1;
-    private javax.swing.JButton btn2;
+    private javax.swing.JButton del_cancel;
+    private javax.swing.JButton del_confirm;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
