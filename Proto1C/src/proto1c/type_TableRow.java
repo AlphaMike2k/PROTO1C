@@ -1,19 +1,26 @@
 package proto1c;
-import java.time.LocalDate;
-import java.sql.*;
 /**
  *
  * @author UP820734
  */
 public class type_TableRow {
-    private String tblName;
-    private String tblDate;
-    private String tblTime;
+    private String tblName = null;
+    private String tblDate = null;
+    private String tblTime = null;
+    private String itemName = null;
+    private double itemCost = 0.00;
+    private int itemPriority = 0;
     
     public type_TableRow(String name, String date, String time) {
+        tblTime = time;
         tblName = name;
         tblDate = date;
-        tblTime = time;
+    }
+    
+    public type_TableRow(String name, double cost, int priority) {
+        itemName = name;
+        itemCost = cost;
+        itemPriority = priority;
     }
 
     public String getTblName() {
@@ -27,6 +34,19 @@ public class type_TableRow {
     public String getTblTime() {
         return tblTime;
     }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public double getItemCost() {
+        return itemCost;
+    }
+
+    public int getItemPriority() {
+        return itemPriority;
+    }
+    
     
     
 }

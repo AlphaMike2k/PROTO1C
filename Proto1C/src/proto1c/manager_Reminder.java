@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proto1c;
+
 import java.time.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
@@ -23,17 +19,24 @@ public class manager_Reminder {
     private String reminderDescription;
 
     /**
+     * Blank constructor
+     */
+    public manager_Reminder() {
+        
+    } 
+    
+    /**
          *
-         * @param reminderName The name of the reminder.
-         * @param reminderDay The day that the user selects for the reminder.
-         * @param reminderMonth The month that the user selects for the reminder.
-         * @param reminderYear The year that the user selects for the reminder.
-         * @param reminderHour The hour that the user selects for the reminder.
-         * @param reminderMinute The minute that the user selects for the reminder.
-         * @param reminderLocation The location of the reminder.
-         * @param reminderDescription The description of the reminder.
+         * @param name The name of the reminder.
+         * @param day The day that the user selects for the reminder.
+         * @param month The month that the user selects for the reminder.
+         * @param year The year that the user selects for the reminder.
+         * @param hour The hour that the user selects for the reminder.
+         * @param minute The minute that the user selects for the reminder.
+         * @param location The location of the reminder.
+         * @param description The description of the reminder.
          */
-    public void manager_Reminder(String name, int day, int month, int year, int hour, int minute,String location, String description){
+    public manager_Reminder(String name, int day, int month, int year, int hour, int minute,String location, String description){
         name = reminderName;
         day =  reminderDay;
         month = reminderMonth;
@@ -45,8 +48,9 @@ public class manager_Reminder {
     }
 
     /**
-         * Method that formats the date and time of the reminder.
-         */
+     * Method that formats the date and time of the reminder.
+     * @return 
+     */
     public static String getCurrentTimeStamp() {
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");//dd/MM/yyyy
         Date now = new Date();
