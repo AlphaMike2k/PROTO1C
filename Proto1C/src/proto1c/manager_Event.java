@@ -9,19 +9,19 @@ import java.sql.Statement;
  *
  * @author 
  */
-public class manager_Task {
+public class manager_Event {
     private final mediator mediatorParent;
     private final Connection dbConnection;
     
-    public manager_Task(mediator mediator, Connection conn) {
+    public manager_Event(mediator mediator, Connection conn) {
         mediatorParent = mediator;
         dbConnection = conn;
     }
     
-    public ResultSet getTasks() {
+    public ResultSet getEvents() {
         try{
             Statement st = dbConnection.createStatement();
-            ResultSet resultData = st.executeQuery("SELECT * FROM Task;");
+            ResultSet resultData = st.executeQuery("SELECT * FROM Event;");
             
             return resultData; 
         }

@@ -17,7 +17,7 @@ import static proto1c.Proto1C.conn;
 public class manager_Reminder {
     private mediator mediatorParent = null;
     private Connection dbConnection = null;
-    
+
     private String reminderName;
     private int reminderDay;
     private int reminderMonth;
@@ -27,6 +27,9 @@ public class manager_Reminder {
     private String reminderLocation;
     private String reminderDescription;
 
+    private mediator mediatorParent = null;
+    private Connection dbConnection = null;
+
     /**
      * Blank constructor
      */
@@ -34,7 +37,7 @@ public class manager_Reminder {
 	        mediatorParent = mediator;
 	        dbConnection = conn;
 	    }
-    
+
     /**
          *
          * @param name The name of the reminder.
@@ -60,9 +63,14 @@ public class manager_Reminder {
         description = reminderDescription;
     }
 
+    public manager_Reminder(mediator mediator, Connection conn) {
+        mediatorParent = mediator;
+        dbConnection = conn;
+    }
+
     /**
      * Method that formats the date and time of the reminder.
-     * @return 
+     * @return
      */
     public static String getCurrentTimeStamp() {
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -73,6 +81,7 @@ public class manager_Reminder {
 
     /**
          * Method that returns the name of the reminder.
+     * @param name
          @return Returns name.
          */
     public String getReminderName(String name){
@@ -81,6 +90,7 @@ public class manager_Reminder {
 
     /**
          * Method that returns the location of the reminder.
+     * @param location
          @return Returns location.
          */
     public String getLocation(String location){
@@ -89,6 +99,7 @@ public class manager_Reminder {
 
     /**
          * Method that returns the description of the reminder.
+     * @param description
          @return Returns description.
          */
     public String getDescription(String description){
@@ -99,16 +110,16 @@ public class manager_Reminder {
         try{
             Statement statement = dbConnection.createStatement();
             ResultSet resultData = statement.executeQuery("SELECT * FROM Reminder;");
-            
-            return resultData; 
+
+            return resultData;
         }
-        
+
         catch(SQLException se){
             se.printStackTrace();
         }
         return null;
     }
-    
-    
+
+
 
 }

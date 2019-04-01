@@ -16,8 +16,6 @@ public class manager_userClient {
     
     private final mediator mediatorParent;
     private final Connection dbConnection;
-    private String sqlString;
-    private ResultSet dbResults;
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
     private javax.swing.JFrame currentGui = new javax.swing.JFrame();
@@ -67,31 +65,28 @@ public class manager_userClient {
     /**
      * 
      * @param date 
+     * @param tasks 
      */
-    public void displayTasks(LocalDate date) {
-        sqlString = "SELECT * FROM Task;";
-        dbResults = getData(sqlString);
-        mainInterface.setTasks(formatData(dbResults, date,"TaskDateTime","TaskName"));
+    public void displayTasks(LocalDate date, ResultSet tasks) {
+        mainInterface.setTasks(formatData(tasks, date,"TaskDateTime","TaskName"));
     }
     
     /**
      * 
      * @param date 
+     * @param reminders 
      */
-    public void displayReminders(LocalDate date) {
-        sqlString = "SELECT * FROM Reminder;";
-        dbResults = getData(sqlString);
-        mainInterface.setReminders(formatData(dbResults, date,"RemDateTime","RemName"));
+    public void displayReminders(LocalDate date, ResultSet reminders) {
+        mainInterface.setReminders(formatData(reminders, date,"RemDateTime","RemName"));
     }
     
     /**
      * 
      * @param date 
+     * @param events 
      */
-    public void displayEvents(LocalDate date) {
-        sqlString = "SELECT * FROM Event;";
-        dbResults = getData(sqlString);
-        mainInterface.setEvents(formatData(dbResults, date,"EveDateTime","EveName"));
+    public void displayEvents(LocalDate date, ResultSet events) {
+        mainInterface.setEvents(formatData(events, date,"EveDateTime","EveName"));
     }
     
     /**
@@ -152,24 +147,6 @@ public class manager_userClient {
         mediatorParent.buttonPressed("calendarClicked", clickedDay,null);
     }
     
-    /**
-     * 
-     * @param sql
-     * @return 
-     */
-    private ResultSet getData(String sql) {
-        try{
-            Statement st = dbConnection.createStatement();
-            ResultSet resultData = st.executeQuery(sql);
-            
-            return resultData; 
-        }
-        
-        catch(SQLException se){
-            se.printStackTrace();
-        }
-        return null;
-    }
     
     /**
      * 
