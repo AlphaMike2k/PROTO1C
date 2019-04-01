@@ -11,6 +11,7 @@ public class mediator {
     private final manager_Task taskManager;
     private final manager_Budget budgetManager;
     private final manager_BudgetList budgetList;
+    private final manager_Event eventManager;
     
     private final Connection dbConnection;
     private LocalDate dateToSend;
@@ -22,10 +23,11 @@ public class mediator {
         dbConnection = conn;
         calendarManager = new manager_Calendar();
         userClient = new manager_userClient(this,dbConnection);
-        reminderManager = new manager_Reminder();
+        reminderManager = new manager_Reminder(this,dbConnection);
         taskManager = new manager_Task(this,dbConnection);
         budgetManager = new manager_Budget();
         budgetList = new manager_BudgetList(this,dbConnection);
+        eventManager = new manager_Event(this,dbConnection);
     }
     
     /**
@@ -35,9 +37,9 @@ public class mediator {
         dateToSend = calendarManager.getCurrentDate();
         userClient.changeInterface("guiMain");
         userClient.displayCalendar(calendarManager.getNumDays(calendarManager.getCurrentMonth()),calendarManager.getMonth(calendarManager.getCurrentMonth()),calendarManager.getFirstDay(calendarManager.getCurrentMonth(), calendarManager.getCurrentYear()), calendarManager.getCurrentYear());
-        userClient.displayEvents(dateToSend);
-        userClient.displayReminders(dateToSend);
-        userClient.displayTasks(dateToSend);
+        userClient.displayEvents(dateToSend, eventManager.getEvents());
+        userClient.displayReminders(dateToSend, reminderManager.getReminders());
+        userClient.displayTasks(dateToSend, taskManager.getTasks());
     }
     
     /**
@@ -62,9 +64,9 @@ public class mediator {
                 break;
             case "calendarClicked":
                 dateToSend = LocalDate.of(calendarManager.getGuiYear(), calendarManager.getGuiMonth(), val);
-                userClient.displayEvents(dateToSend);
-                userClient.displayReminders(dateToSend);
-                userClient.displayTasks(dateToSend);
+                userClient.displayEvents(dateToSend, eventManager.getEvents());
+                userClient.displayReminders(dateToSend, reminderManager.getReminders());
+                userClient.displayTasks(dateToSend, taskManager.getTasks());
                 break;
             case "guiMainSpendingList":
                 userClient.changeInterface(button);

@@ -1,5 +1,9 @@
 package proto1c;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
@@ -17,7 +21,10 @@ public class manager_Reminder {
     private int reminderMinute;
     private String reminderLocation;
     private String reminderDescription;
-
+    
+    private mediator mediatorParent = null;
+    private Connection dbConnection = null;
+    
     /**
      * Blank constructor
      */
@@ -46,6 +53,11 @@ public class manager_Reminder {
         location = reminderLocation;
         description = reminderDescription;
     }
+    
+    public manager_Reminder(mediator mediator, Connection conn) {
+        mediatorParent = mediator;
+        dbConnection = conn;
+    }
 
     /**
      * Method that formats the date and time of the reminder.
@@ -60,6 +72,7 @@ public class manager_Reminder {
 
     /**
          * Method that returns the name of the reminder.
+     * @param name
          @return Returns name.
          */
     public String getReminderName(String name){
@@ -68,6 +81,7 @@ public class manager_Reminder {
 
     /**
          * Method that returns the location of the reminder.
+     * @param location
          @return Returns location.
          */
     public String getLocation(String location){
@@ -76,11 +90,25 @@ public class manager_Reminder {
 
     /**
          * Method that returns the description of the reminder.
+     * @param description
          @return Returns description.
          */
     public String getDescription(String description){
         return description;
     }
-
+    
+    public ResultSet getReminders() {
+        try{
+            Statement st = dbConnection.createStatement();
+            ResultSet resultData = st.executeQuery("SELECT * FROM Reminder;");
+            
+            return resultData; 
+        }
+        
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+        return null;
+    }
 
 }
