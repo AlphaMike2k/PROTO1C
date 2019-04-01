@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,12 +12,15 @@ import java.util.*;
  */
 public class manager_userClient {
     private final gui_Main mainInterface = new gui_Main(this);
+    private final gui_BudgetList budgetList = new gui_BudgetList(this);
+    
     private final mediator mediatorParent;
     private final Connection dbConnection;
     private String sqlString;
     private ResultSet dbResults;
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+    private javax.swing.JFrame currentGui = new javax.swing.JFrame();
     
     /**
      * Creates and controls all the GUIs
@@ -33,14 +37,21 @@ public class manager_userClient {
      * @param newInterface the string equivalent of the interface to change to
      */
     public void changeInterface(String newInterface) {
-            
+        currentGui.setVisible(false);
+        
         switch (newInterface) {
-        case "main": 
+        case "guiMain":
             mainInterface.setVisible(true);
+            currentGui = mainInterface;
             break;
+        case "guiMainSpendingList":
+            budgetList.setVisible(true);
+            currentGui = budgetList;
         default: 
-            }
+        
         }
+        
+    }
     
     /**
      * Calls to change the calendar in the gui_Main
@@ -87,14 +98,50 @@ public class manager_userClient {
      * Triggers method in mediator that user has pressed 'Next' button on gui_Main calendar
      */
     public void nextMonth() {
-        mediatorParent.buttonPressed("guiMainNext",0);
+        mediatorParent.buttonPressed("guiMainNext",0,null);
     }
     
     /**
      * Triggers method in mediator that user has pressed 'Previous' button on gui_Main calendar
      */
     public void prevMonth() {
-        mediatorParent.buttonPressed("guiMainPrev",0);
+        mediatorParent.buttonPressed("guiMainPrev",0,null);
+    }
+    
+    /**
+     * Triggers method in mediator that user has pressed 'Spending List' button on gui_Main calendar
+     */
+    public void spendingList() {
+         mediatorParent.buttonPressed("guiMainSpendingList",0,null);
+    }
+    
+    
+    /**
+     * Triggers method in mediator that user has pressed 'Back' button on a GUI
+     */
+    public void back() {
+        mediatorParent.buttonPressed("back",0,null);
+    }
+    
+    /**
+     * 
+     * @param newRow 
+     */
+    public void spendingListAdd(type_TableRow newRow) {
+        mediatorParent.buttonPressed("guiSpendListAdd", 0, newRow);
+    }
+    
+    /**
+     * 
+     * @param budgetSet 
+     */
+    public void displaySpendingList(ResultSet budgetSet) {
+        budgetList.loadList(formatData(budgetSet, "BudItem", "ItemCost", "Priority"));
+    }
+    
+    
+    public void spendingListCheck(type_TableRow row) {
+        mediatorParent.buttonPressed("spendingCheckBox", 0, row);
     }
     
     /**
@@ -102,7 +149,7 @@ public class manager_userClient {
      * @param clickedDay 
      */
     public void calendarClicked(int clickedDay) {
-        mediatorParent.buttonPressed("calendarClicked", clickedDay);
+        mediatorParent.buttonPressed("calendarClicked", clickedDay,null);
     }
     
     /**
@@ -164,7 +211,6 @@ public class manager_userClient {
             
             for (int j = 0; j < dsDatesList.size(); j++) {
                 LocalDateTime tmpDateTime = dsDatesList.get(j).toLocalDateTime();
-                //System.out.println(dsStringList.get(j) + " " + tmpDateTime.format(dateFormat) + " " + tmpDateTime.format(timeFormat));
                 tableRows.add(new type_TableRow(dsStringList.get(j),tmpDateTime.format(dateFormat),tmpDateTime.format(timeFormat)));
             }
             
@@ -177,8 +223,64 @@ public class manager_userClient {
         return null;
     }
     
-    
-    public void displayAlert() {
+    /**
+     * 
+     * @param data
+     * @param colName
+     * @param colName2
+     * @param colName3
+     * @return 
+     */
+    private ArrayList <type_TableRow> formatData(ResultSet data, String colName, String colName2, String colName3) {
+        ArrayList <String> dsNamesList = new ArrayList<String>();
+        ArrayList <Double> dsCostList = new ArrayList<Double>();
+        ArrayList <Integer> dsPriorityList = new ArrayList<Integer>();
         
+        ArrayList<type_TableRow> tableRows= new ArrayList<type_TableRow>();
+        
+        try{
+            while (data.next()) {
+                dsNamesList.add(data.getString(colName));
+                dsCostList.add(data.getDouble(colName2));
+                dsPriorityList.add(data.getInt(colName3));
+            }
+            
+            for (int i = 1; i < dsPriorityList.size(); i++) {
+                int insertAt = i;
+                String curName = dsNamesList.get(i);
+                double curCost = dsCostList.get(i);
+                int curPriority = dsPriorityList.get(i);
+                
+                while (insertAt > 0 & dsPriorityList.get(insertAt-1) > curPriority) {
+                    dsPriorityList.set(insertAt, dsPriorityList.get(insertAt-1));
+                    dsCostList.set(insertAt, dsCostList.get(insertAt-1));
+                    dsNamesList.set(insertAt, dsNamesList.get(insertAt-1));
+                    insertAt --;
+                }
+                
+                dsPriorityList.set(insertAt, curPriority);
+                dsCostList.set(insertAt, curCost);
+                dsNamesList.set(insertAt, curName);
+            }
+            
+            for (int j = 0; j < dsPriorityList.size(); j++) {
+                tableRows.add(new type_TableRow(dsNamesList.get(j),dsCostList.get(j),dsPriorityList.get(j)));
+            }
+            
+            return tableRows;
+        }
+        
+        catch(SQLException se){
+            se.printStackTrace();
+        } 
+        return null;
+    }
+    
+    /**
+     * 
+     * @param message 
+     */
+    public void displayAlert(String message) {
+        JOptionPane.showConfirmDialog(null, message, "Error", -1);
     }
 }

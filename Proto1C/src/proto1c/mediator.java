@@ -23,9 +23,9 @@ public class mediator {
         calendarManager = new manager_Calendar();
         userClient = new manager_userClient(this,dbConnection);
         reminderManager = new manager_Reminder();
-        taskManager = new manager_Task();
+        taskManager = new manager_Task(this,dbConnection);
         budgetManager = new manager_Budget();
-        budgetList = new manager_BudgetList();
+        budgetList = new manager_BudgetList(this,dbConnection);
     }
     
     /**
@@ -33,7 +33,7 @@ public class mediator {
      */
     public void startMediator() {
         dateToSend = calendarManager.getCurrentDate();
-        userClient.changeInterface("main");
+        userClient.changeInterface("guiMain");
         userClient.displayCalendar(calendarManager.getNumDays(calendarManager.getCurrentMonth()),calendarManager.getMonth(calendarManager.getCurrentMonth()),calendarManager.getFirstDay(calendarManager.getCurrentMonth(), calendarManager.getCurrentYear()), calendarManager.getCurrentYear());
         userClient.displayEvents(dateToSend);
         userClient.displayReminders(dateToSend);
@@ -44,10 +44,14 @@ public class mediator {
      * Method triggered by user interacting with GUI, passed by GUI parent.
      * Instructs based on which button pressed.
      * @param button the button the user pressed given a string value
-     * @param day
+     * @param val
+     * @param newRow
      */
-    public void buttonPressed(String button, int day) {
+    public void buttonPressed(String button, int val, type_TableRow newRow) {
         switch (button) {
+            case "back":
+                userClient.changeInterface("guiMain");
+                break;
             case "guiMainNext":
                 calendarManager.setGuiMonth(calendarManager.getGuiMonth()+1);
                 userClient.displayCalendar(calendarManager.getNumDays(calendarManager.getGuiMonth()),calendarManager.getMonth(calendarManager.getGuiMonth()),calendarManager.getFirstDay(calendarManager.getGuiMonth(), calendarManager.getGuiYear()), calendarManager.getGuiYear());
@@ -57,12 +61,25 @@ public class mediator {
                 userClient.displayCalendar(calendarManager.getNumDays(calendarManager.getGuiMonth()),calendarManager.getMonth(calendarManager.getGuiMonth()),calendarManager.getFirstDay(calendarManager.getGuiMonth(), calendarManager.getGuiYear()), calendarManager.getGuiYear());
                 break;
             case "calendarClicked":
-                dateToSend = LocalDate.of(calendarManager.getGuiYear(), calendarManager.getGuiMonth(), day);
+                dateToSend = LocalDate.of(calendarManager.getGuiYear(), calendarManager.getGuiMonth(), val);
                 userClient.displayEvents(dateToSend);
                 userClient.displayReminders(dateToSend);
                 userClient.displayTasks(dateToSend);
                 break;
-            default: 
+            case "guiMainSpendingList":
+                userClient.changeInterface(button);
+                userClient.displaySpendingList(budgetList.getBudgetList());
+                break;
+            case "guiSpendListAdd":
+                budgetList.insertNewItem(newRow);
+                userClient.displaySpendingList(budgetList.getBudgetList());
+                break;
+            case "spendingCheckBox":
+                budgetList.deleteItem(newRow);
+                userClient.displaySpendingList(budgetList.getBudgetList());
+                break;
+            default:
+                userClient.displayAlert("Unknown button");
         }
     }
 }

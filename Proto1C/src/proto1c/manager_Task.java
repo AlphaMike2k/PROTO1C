@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proto1c;
+
+import java.sql.Connection;
 
 /**
  *
- * @author Josh
+ * @author 
  */
 public class manager_Task {
     
+    public manager_Task(mediator mediator, Connection conn) {
+        
+    }
 }
