@@ -15,8 +15,8 @@ import static proto1c.Proto1C.conn;
  **@author UP875166
  */
 public class manager_Reminder {
-    private mediator mediatorParent = null;
-    private Connection dbConnection = null;
+//    private mediator mediatorParent = null;
+//    private Connection dbConnection = null;
 
     private String reminderName;
     private int reminderDay;
@@ -63,10 +63,10 @@ public class manager_Reminder {
         description = reminderDescription;
     }
 
-    public manager_Reminder(mediator mediator, Connection conn) {
-        mediatorParent = mediator;
-        dbConnection = conn;
-    }
+//    public manager_Reminder(mediator mediator, Connection conn) {
+//        mediatorParent = mediator;
+//        dbConnection = conn;
+//    }
 
     /**
      * Method that formats the date and time of the reminder.
