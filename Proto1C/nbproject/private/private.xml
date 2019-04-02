@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/gui_Main.java</file>
-            <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/manager_Calendar.java</file>
+            <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/gui_BudgetList.java</file>
+            <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/gui_BLEdit.java</file>
             <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/mediator.java</file>
             <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/manager_userClient.java</file>
+            <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/manager_BudgetList.java</file>
             <file>file:/D:/Documents/Uni%20work/INSE/PROTO1C/Proto1C/src/proto1c/Proto1C.java</file>
         </group>
     </open-files>

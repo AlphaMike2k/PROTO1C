@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class manager_userClient {
     private final gui_Main mainInterface = new gui_Main(this);
     private final gui_BudgetList budgetList = new gui_BudgetList(this);
+    private final gui_BLEdit blEdit = new gui_BLEdit(this);
     
     private final mediator mediatorParent;
     private final Connection dbConnection;
@@ -45,6 +46,11 @@ public class manager_userClient {
         case "guiMainSpendingList":
             budgetList.setVisible(true);
             currentGui = budgetList;
+            break;
+        case "guiSpendingListEdit":
+            blEdit.setVisible(true);
+            currentGui = blEdit;
+            break;
         default: 
         
         }
@@ -110,6 +116,10 @@ public class manager_userClient {
          mediatorParent.buttonPressed("guiMainSpendingList",0,null);
     }
     
+    public void editSpendingList() {
+         mediatorParent.buttonPressed("guiSpendingListEdit",0,null);
+    }
+    
     
     /**
      * Triggers method in mediator that user has pressed 'Back' button on a GUI
@@ -134,9 +144,17 @@ public class manager_userClient {
         budgetList.loadList(formatData(budgetSet, "BudItem", "ItemCost", "Priority"));
     }
     
+    public void displaySpendingListEdit(ResultSet budgetSet) {
+        blEdit.loadList(formatData(budgetSet, "BudItem", "ItemCost", "Priority"));
+    }
+    
     
     public void spendingListCheck(type_TableRow row) {
-        mediatorParent.buttonPressed("spendingCheckBox", 0, row);
+        mediatorParent.buttonPressed("spendingListDelete", 0, row);
+    }
+    
+    public void spendingListSave(type_TableRow row) {
+        mediatorParent.buttonPressed("spendingListSave", 0, row);
     }
     
     /**
