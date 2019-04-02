@@ -14,6 +14,7 @@ public class manager_userClient {
     private final gui_Main mainInterface = new gui_Main(this);
     private final gui_BudgetList budgetList = new gui_BudgetList(this);
     private final gui_BLEdit blEdit = new gui_BLEdit(this);
+    private final gui_Event mainEvent = new gui_Event(this);
     
     private final mediator mediatorParent;
     private final Connection dbConnection;
@@ -50,6 +51,10 @@ public class manager_userClient {
         case "guiSpendingListEdit":
             blEdit.setVisible(true);
             currentGui = blEdit;
+            break;
+        case "guiMainEventScreen":
+            mainEvent.setVisible(true);
+            currentGui = mainEvent;
             break;
         default: 
         
@@ -120,7 +125,15 @@ public class manager_userClient {
          mediatorParent.buttonPressed("guiSpendingListEdit",0,null);
     }
     
+     /**
+     * Triggers method in mediator that user has pressed 'Events' button on gui_Main screen
+     */
     
+   
+    
+    public void viewEvents(){
+        mediatorParent.buttonPressed("guiMainEventScreen",0,null);
+    }
     /**
      * Triggers method in mediator that user has pressed 'Back' button on a GUI
      */
