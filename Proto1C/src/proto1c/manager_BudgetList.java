@@ -54,4 +54,19 @@ public class manager_BudgetList {
             se.printStackTrace();
         }
     }
+    
+    public void updateItem (type_TableRow row) {
+        try {
+            Statement stmt = null;
+            stmt = dbConnection.createStatement();
+            String sql = "UPDATE BudgetList Set BudItem = '" + row.getNewItemName() + "' , ItemCost = " + row.getNewItemCost() + " , Priority = " + row.getNewItemPriority() + " WHERE BudItem = '" + row.getItemName() + "' AND ItemCost = " + row.getItemCost() + " AND Priority = " + row.getItemPriority() + ";";
+            stmt.execute(sql);
+        }
+        
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+    
+    
 }

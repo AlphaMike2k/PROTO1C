@@ -80,6 +80,18 @@ public class mediator {
                 budgetList.deleteItem(newRow);
                 userClient.displaySpendingList(budgetList.getBudgetList());
                 break;
+            case "guiSpendingListEdit":
+                userClient.changeInterface(button);
+                userClient.displaySpendingListEdit(budgetList.getBudgetList());
+                break;
+            case "spendingListSave":
+                budgetList.updateItem(newRow);
+                userClient.displaySpendingListEdit(budgetList.getBudgetList());
+                break;
+            case "spendingListDelete":
+                budgetList.deleteItem(newRow);
+                userClient.displaySpendingListEdit(budgetList.getBudgetList());
+                break;
             case "guiMainEventScreen":
                 userClient.changeInterface(button);
                 break;

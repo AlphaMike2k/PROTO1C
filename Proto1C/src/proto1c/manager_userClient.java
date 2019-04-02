@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class manager_userClient {
     private final gui_Main mainInterface = new gui_Main(this);
     private final gui_BudgetList budgetList = new gui_BudgetList(this);
+    private final gui_BLEdit blEdit = new gui_BLEdit(this);
     private final gui_Event mainEvent = new gui_Event(this);
     
     private final mediator mediatorParent;
@@ -46,6 +47,10 @@ public class manager_userClient {
         case "guiMainSpendingList":
             budgetList.setVisible(true);
             currentGui = budgetList;
+            break;
+        case "guiSpendingListEdit":
+            blEdit.setVisible(true);
+            currentGui = blEdit;
             break;
         case "guiMainEventScreen":
             mainEvent.setVisible(true);
@@ -116,9 +121,15 @@ public class manager_userClient {
          mediatorParent.buttonPressed("guiMainSpendingList",0,null);
     }
     
+    public void editSpendingList() {
+         mediatorParent.buttonPressed("guiSpendingListEdit",0,null);
+    }
+    
      /**
      * Triggers method in mediator that user has pressed 'Events' button on gui_Main screen
      */
+    
+   
     
     public void viewEvents(){
         mediatorParent.buttonPressed("guiMainEventScreen",0,null);
@@ -146,9 +157,17 @@ public class manager_userClient {
         budgetList.loadList(formatData(budgetSet, "BudItem", "ItemCost", "Priority"));
     }
     
+    public void displaySpendingListEdit(ResultSet budgetSet) {
+        blEdit.loadList(formatData(budgetSet, "BudItem", "ItemCost", "Priority"));
+    }
+    
     
     public void spendingListCheck(type_TableRow row) {
-        mediatorParent.buttonPressed("spendingCheckBox", 0, row);
+        mediatorParent.buttonPressed("spendingListDelete", 0, row);
+    }
+    
+    public void spendingListSave(type_TableRow row) {
+        mediatorParent.buttonPressed("spendingListSave", 0, row);
     }
     
     /**
