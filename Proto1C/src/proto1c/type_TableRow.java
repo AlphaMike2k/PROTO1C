@@ -13,6 +13,7 @@ public class type_TableRow {
     private String newItemName = null;
     private double newItemCost = 0.00;
     private int newItemPriority = 0;
+    private String tblType = null;
     
     public type_TableRow(String name, String date, String time) {
         tblTime = time;
@@ -20,6 +21,13 @@ public class type_TableRow {
         tblDate = date;
     }
     
+    public type_TableRow(String name, String date, String time, String type) {
+        tblTime = time;
+        tblName = name;
+        tblDate = date;
+        tblType = type;
+    }
+        
     public type_TableRow(String name, double cost, int priority) {
         itemName = name;
         itemCost = cost;
@@ -70,6 +78,11 @@ public class type_TableRow {
     public int getNewItemPriority() {
         return newItemPriority;
     }
+
+    public String getTblType() {
+        return tblType;
+    }
+    
     
     
 }

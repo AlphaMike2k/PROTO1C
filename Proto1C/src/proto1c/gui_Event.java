@@ -5,7 +5,10 @@
  */
 package proto1c;
 
+import java.util.ArrayList;
+import javax.swing.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,7 +25,19 @@ public class gui_Event extends javax.swing.JFrame {
         userClientParent = userClient;
         initComponents();
     }
-
+    
+       public void loadList(ArrayList <type_TableRow> allEvents) {
+        eventList.setRowHeight(40);
+        DefaultTableModel model = (DefaultTableModel) eventList.getModel();
+            
+        for (int i = (eventList.getRowCount() -1); i >= 0; i--) {
+            model.removeRow(i);
+        }
+            
+        for (int i = 0; i < allEvents.size(); i++) {
+            model.addRow(new Object[]{allEvents.get(i).getTblName(), allEvents.get(i).getTblType(), allEvents.get(i).getTblTime() + " " + allEvents.get(i).getTblDate()}); 
+        }
+    }
     gui_Event() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -43,16 +58,11 @@ public class gui_Event extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jLabel1 = new javax.swing.JLabel();
-        label2 = new javax.swing.JLabel();
-        label1 = new javax.swing.JLabel();
-        label3 = new javax.swing.JLabel();
         Edit1 = new javax.swing.JButton();
         Del1 = new javax.swing.JButton();
         Edit2 = new javax.swing.JButton();
         Del2 = new javax.swing.JButton();
         Del3 = new javax.swing.JButton();
-        label4 = new javax.swing.JLabel();
-        label5 = new javax.swing.JLabel();
         Edit4 = new javax.swing.JButton();
         Edit5 = new javax.swing.JButton();
         Del4 = new javax.swing.JButton();
@@ -60,6 +70,8 @@ public class gui_Event extends javax.swing.JFrame {
         Edit3 = new javax.swing.JButton();
         evt_back = new javax.swing.JButton();
         evt_back1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        eventList = new javax.swing.JTable();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,15 +124,6 @@ public class gui_Event extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Events");
 
-        label2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        label2.setText("Event 2");
-
-        label1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        label1.setText("Event 1");
-
-        label3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        label3.setText("Event 3");
-
         Edit1.setText("Edit");
         Edit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,12 +158,6 @@ public class gui_Event extends javax.swing.JFrame {
                 Del3ActionPerformed(evt);
             }
         });
-
-        label4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        label4.setText("Event 4");
-
-        label5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        label5.setText("Event 5");
 
         Edit4.setText("Edit");
         Edit4.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +208,46 @@ public class gui_Event extends javax.swing.JFrame {
             }
         });
 
+        eventList.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        eventList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Event:", "Event Type:", "Event Date & Time:", "Edit?:"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        eventList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eventListMouseClicked(evt);
+            }
+        });
+        eventList.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                eventListPropertyChange(evt);
+            }
+        });
+        jScrollPane1.setViewportView(eventList);
+        if (eventList.getColumnModel().getColumnCount() > 0) {
+            eventList.getColumnModel().getColumn(0).setResizable(false);
+            eventList.getColumnModel().getColumn(1).setResizable(false);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,79 +256,69 @@ public class gui_Event extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label5)
-                            .addComponent(label4)
-                            .addComponent(label3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label1)
-                                    .addComponent(label2))
-                                .addGap(164, 164, 164)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Edit1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Del1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(Edit2)
-                                            .addComponent(Edit4)
-                                            .addComponent(Edit5)
-                                            .addComponent(Edit3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Del3)
-                                            .addComponent(Del2)
-                                            .addComponent(Del4)
-                                            .addComponent(Del5))))))
-                        .addContainerGap(116, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(evt_back1)
                         .addGap(18, 18, 18)
                         .addComponent(evt_back)
-                        .addGap(26, 26, 26))))
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Edit1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Del1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Edit2)
+                                    .addComponent(Edit4)
+                                    .addComponent(Edit5)
+                                    .addComponent(Edit3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Del3)
+                                    .addComponent(Del2)
+                                    .addComponent(Del4)
+                                    .addComponent(Del5))))
+                        .addContainerGap(216, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(evt_back)
-                            .addComponent(evt_back1))))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label1)
-                    .addComponent(Edit1)
-                    .addComponent(Del1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label2)
-                    .addComponent(Edit2)
-                    .addComponent(Del2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label3)
-                    .addComponent(Del3)
-                    .addComponent(Edit3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label4)
-                    .addComponent(Edit4)
-                    .addComponent(Del4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label5)
-                    .addComponent(Edit5)
-                    .addComponent(Del5))
-                .addContainerGap(29, Short.MAX_VALUE))
+                            .addComponent(evt_back1))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Edit1)
+                            .addComponent(Del1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Edit2)
+                            .addComponent(Del2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Del3)
+                            .addComponent(Edit3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Edit4)
+                            .addComponent(Del4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Edit5)
+                            .addComponent(Del5)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
@@ -310,7 +337,7 @@ public class gui_Event extends javax.swing.JFrame {
     private void Del1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del1ActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-            label1.setVisible(false);
+            //label1.setVisible(false);
             Edit1.setVisible(false);
             Del1.setVisible(false);
         }
@@ -319,7 +346,7 @@ public class gui_Event extends javax.swing.JFrame {
     private void Del2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del2ActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-            label2.setVisible(false);
+          //  label2.setVisible(false);
             Edit2.setVisible(false);
             Del2.setVisible(false);
         }
@@ -328,7 +355,7 @@ public class gui_Event extends javax.swing.JFrame {
     private void Del3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del3ActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-            label3.setVisible(false);
+         //   label3.setVisible(false);
             Edit3.setVisible(false);
             Del3.setVisible(false);
         };
@@ -337,7 +364,7 @@ public class gui_Event extends javax.swing.JFrame {
     private void Del4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del4ActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-            label4.setVisible(false);
+        //    label4.setVisible(false);
             Edit4.setVisible(false);
             Del4.setVisible(false);
         }
@@ -346,7 +373,7 @@ public class gui_Event extends javax.swing.JFrame {
     private void Del5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del5ActionPerformed
        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-            label5.setVisible(false);
+        //    label5.setVisible(false);
             Edit5.setVisible(false);
             Del5.setVisible(false);
         }
@@ -378,6 +405,21 @@ public class gui_Event extends javax.swing.JFrame {
         n.setVisible(true);
     }//GEN-LAST:event_evt_back1ActionPerformed
 
+    private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
+        String value = eventList.getModel().getValueAt(eventList.getSelectedRow(), eventList.getSelectedColumn()).toString();
+        int row = eventList.getSelectedRow();
+
+        double cost = Double.valueOf(eventList.getModel().getValueAt(row, 2).toString().replace("£", ""));
+
+        if (value.equals("true")) {
+            userClientParent.spendingListCheck(new type_TableRow(eventList.getModel().getValueAt(row, 1).toString(), cost, Integer.valueOf(eventList.getModel().getValueAt(row, 0).toString())));
+        }
+    }//GEN-LAST:event_eventListMouseClicked
+
+    private void eventListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_eventListPropertyChange
+
+    }//GEN-LAST:event_eventListPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Del1;
@@ -390,6 +432,7 @@ public class gui_Event extends javax.swing.JFrame {
     private javax.swing.JButton Edit3;
     private javax.swing.JButton Edit4;
     private javax.swing.JButton Edit5;
+    private javax.swing.JTable eventList;
     private javax.swing.JButton evt_back;
     private javax.swing.JButton evt_back1;
     private javax.swing.JDialog jDialog1;
@@ -399,10 +442,6 @@ public class gui_Event extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JLabel label1;
-    private javax.swing.JLabel label2;
-    private javax.swing.JLabel label3;
-    private javax.swing.JLabel label4;
-    private javax.swing.JLabel label5;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
