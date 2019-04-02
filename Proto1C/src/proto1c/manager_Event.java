@@ -31,4 +31,45 @@ public class manager_Event {
         }
         return null;
     }
+    
+        public void insertNewEvent(type_TableRow row) {
+        try {
+            Statement stmt = null;
+            stmt = dbConnection.createStatement();
+            String sql = "insert into Event (EveName, EveType, EveDateTime) values ('" + row.getItemName() + "'," + row.getItemCost() + "," + row.getItemPriority() + ");";
+            stmt.execute(sql);
+        }
+        
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+    
+    public void deleteEvent(type_TableRow row) {
+        try {
+            Statement stmt = null;
+            stmt = dbConnection.createStatement();
+            String sql = "DELETE FROM Event WHERE EveName = '" + row.getItemName() + "' AND EveType = " + row.getItemCost() + " AND EveDateTime = " + row.getItemPriority() + ";";
+            stmt.execute(sql);
+        }
+        
+            catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+    
+     public void updateEvent (type_TableRow row) {
+        try {
+            Statement stmt = null;
+            stmt = dbConnection.createStatement();
+            String sql = "UPDATE Event Set EveName = '" + row.getNewItemName() + "' , EveType = " + row.getNewItemCost() + " , EveDateTime = " + row.getNewItemPriority() + " WHERE EveName = '" + row.getItemName() + "' AND EveType = " + row.getItemCost() + " AND EveDateTime = " + row.getItemPriority() + ";";
+            stmt.execute(sql);
+        }
+        
+        catch(SQLException se){
+            se.printStackTrace();
+        }
+    }
+    
+    
 }

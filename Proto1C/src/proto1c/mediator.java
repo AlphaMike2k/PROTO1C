@@ -94,6 +94,7 @@ public class mediator {
                 break;
             case "guiMainEventScreen":
                 userClient.changeInterface(button);
+                userClient.showEvents(eventManager.getEvents());
                 break;
             default:
                 userClient.displayAlert("Unknown button");
