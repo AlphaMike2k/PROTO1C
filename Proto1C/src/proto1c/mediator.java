@@ -12,7 +12,7 @@ public class mediator {
     private final manager_Budget budgetManager;
     private final manager_BudgetList budgetList;
     private final manager_Event eventManager;
-    
+        
     private final Connection dbConnection;
     private LocalDate dateToSend;
     /**
@@ -79,6 +79,9 @@ public class mediator {
             case "spendingCheckBox":
                 budgetList.deleteItem(newRow);
                 userClient.displaySpendingList(budgetList.getBudgetList());
+                break;
+            case "guiMainEventScreen":
+                userClient.changeInterface(button);
                 break;
             default:
                 userClient.displayAlert("Unknown button");
