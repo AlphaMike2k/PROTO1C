@@ -259,7 +259,7 @@ public class manager_userClient {
                 double curCost = dsCostList.get(i);
                 int curPriority = dsPriorityList.get(i);
                 
-                while (insertAt > 0 & dsPriorityList.get(insertAt-1) > curPriority) {
+                while (insertAt > 0 && dsPriorityList.get(insertAt-1) > curPriority) {
                     dsPriorityList.set(insertAt, dsPriorityList.get(insertAt-1));
                     dsCostList.set(insertAt, dsCostList.get(insertAt-1));
                     dsNamesList.set(insertAt, dsNamesList.get(insertAt-1));
