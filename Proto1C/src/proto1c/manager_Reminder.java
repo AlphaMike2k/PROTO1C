@@ -63,10 +63,6 @@ public class manager_Reminder {
         description = reminderDescription;
     }
 
-//    public manager_Reminder(mediator mediator, Connection conn) {
-//        mediatorParent = mediator;
-//        dbConnection = conn;
-//    }
 
     /**
      * Method that formats the date and time of the reminder.
