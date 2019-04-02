@@ -3,3 +3,4 @@
 
 # Ignore Gradle build output directory
 build
+/Proto1C/dist/
