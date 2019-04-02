@@ -5,17 +5,26 @@
  */
 package proto1c;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Michael
  */
 public class gui_Event extends javax.swing.JFrame {
+    private final manager_userClient userClientParent;
 
     /**
      * Creates new form gui_Event
+     * @param userClient
      */
-    public gui_Event() {
+    public gui_Event(manager_userClient userClient) {
+        userClientParent = userClient;
         initComponents();
+    }
+
+    gui_Event() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -49,6 +58,8 @@ public class gui_Event extends javax.swing.JFrame {
         Del4 = new javax.swing.JButton();
         Del5 = new javax.swing.JButton();
         Edit3 = new javax.swing.JButton();
+        evt_back = new javax.swing.JButton();
+        evt_back1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -186,6 +197,20 @@ public class gui_Event extends javax.swing.JFrame {
             }
         });
 
+        evt_back.setText("Back");
+        evt_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evt_backActionPerformed(evt);
+            }
+        });
+
+        evt_back1.setText("Create");
+        evt_back1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evt_back1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,39 +218,54 @@ public class gui_Event extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label5)
-                    .addComponent(label4)
-                    .addComponent(label3)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label1)
-                            .addComponent(label2))
-                        .addGap(164, 164, 164)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label5)
+                            .addComponent(label4)
+                            .addComponent(label3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(Edit1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Del1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Edit2)
-                                    .addComponent(Edit4)
-                                    .addComponent(Edit5)
-                                    .addComponent(Edit3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Del3)
-                                    .addComponent(Del2)
-                                    .addComponent(Del4)
-                                    .addComponent(Del5)))))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(116, Short.MAX_VALUE))
+                                    .addComponent(label1)
+                                    .addComponent(label2))
+                                .addGap(164, 164, 164)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Edit1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Del1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(Edit2)
+                                            .addComponent(Edit4)
+                                            .addComponent(Edit5)
+                                            .addComponent(Edit3))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Del3)
+                                            .addComponent(Del2)
+                                            .addComponent(Del4)
+                                            .addComponent(Del5))))))
+                        .addContainerGap(116, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(evt_back1)
+                        .addGap(18, 18, 18)
+                        .addComponent(evt_back)
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(evt_back)
+                            .addComponent(evt_back1))))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label1)
@@ -251,7 +291,7 @@ public class gui_Event extends javax.swing.JFrame {
                     .addComponent(label5)
                     .addComponent(Edit5)
                     .addComponent(Del5))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -268,28 +308,48 @@ public class gui_Event extends javax.swing.JFrame {
     }//GEN-LAST:event_Edit2ActionPerformed
    
     private void Del1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del1ActionPerformed
-        gui_EventDel f = new gui_EventDel();
-        f.setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION){
+            label1.setVisible(false);
+            Edit1.setVisible(false);
+            Del1.setVisible(false);
+        }
     }//GEN-LAST:event_Del1ActionPerformed
 
     private void Del2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del2ActionPerformed
-        gui_EventDel g = new gui_EventDel();
-        g.setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION){
+            label2.setVisible(false);
+            Edit2.setVisible(false);
+            Del2.setVisible(false);
+        }
     }//GEN-LAST:event_Del2ActionPerformed
 
     private void Del3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del3ActionPerformed
-        gui_EventDel h = new gui_EventDel();
-        h.setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION){
+            label3.setVisible(false);
+            Edit3.setVisible(false);
+            Del3.setVisible(false);
+        };
     }//GEN-LAST:event_Del3ActionPerformed
 
     private void Del4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del4ActionPerformed
-        gui_EventDel i = new gui_EventDel();
-        i.setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION){
+            label4.setVisible(false);
+            Edit4.setVisible(false);
+            Del4.setVisible(false);
+        }
     }//GEN-LAST:event_Del4ActionPerformed
 
     private void Del5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Del5ActionPerformed
-        gui_EventDel j = new gui_EventDel();
-        j.setVisible(true);
+       int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if(confirm == JOptionPane.YES_OPTION){
+            label5.setVisible(false);
+            Edit5.setVisible(false);
+            Del5.setVisible(false);
+        }
     }//GEN-LAST:event_Del5ActionPerformed
 
     private void Edit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edit3ActionPerformed
@@ -307,6 +367,17 @@ public class gui_Event extends javax.swing.JFrame {
         e.setVisible(true);
     }//GEN-LAST:event_Edit5ActionPerformed
 
+    private void evt_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_backActionPerformed
+        // Once clicked, it will take the user back to the main screen to access other features
+        userClientParent.back();
+    }//GEN-LAST:event_evt_backActionPerformed
+
+    private void evt_back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_back1ActionPerformed
+        // TODO add your handling code here:
+        gui_EventNew n= new gui_EventNew();
+        n.setVisible(true);
+    }//GEN-LAST:event_evt_back1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Del1;
@@ -319,6 +390,8 @@ public class gui_Event extends javax.swing.JFrame {
     private javax.swing.JButton Edit3;
     private javax.swing.JButton Edit4;
     private javax.swing.JButton Edit5;
+    private javax.swing.JButton evt_back;
+    private javax.swing.JButton evt_back1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JInternalFrame jInternalFrame1;

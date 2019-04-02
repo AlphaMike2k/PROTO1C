@@ -328,8 +328,11 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnAddEvent">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add Event"/>
+            <Property name="text" type="java.lang.String" value="Events"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddEventActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEditEvent">
           <Properties>

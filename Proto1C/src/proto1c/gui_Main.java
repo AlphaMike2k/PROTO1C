@@ -208,7 +208,12 @@ public class gui_Main extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Options:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
-        btnAddEvent.setText("Add Event");
+        btnAddEvent.setText("Events");
+        btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEventActionPerformed(evt);
+            }
+        });
 
         btnEditEvent.setText("Edit Event");
 
@@ -387,6 +392,11 @@ public class gui_Main extends javax.swing.JFrame {
     private void btnBudgetListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBudgetListActionPerformed
         userClientParent.spendingList();
     }//GEN-LAST:event_btnBudgetListActionPerformed
+
+    private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
+        // Clicking this button opens the Event GUI, enabling you to access features from there.
+        userClientParent.viewEvents();
+    }//GEN-LAST:event_btnAddEventActionPerformed
     
     /**
      * Specifies calender properties
