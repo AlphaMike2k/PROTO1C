@@ -13,6 +13,7 @@ public class manager_Event {
     private final mediator mediatorParent;
     private final Connection dbConnection;
     
+    
     public manager_Event(mediator mediator, Connection conn) {
         mediatorParent = mediator;
         dbConnection = conn;
@@ -36,7 +37,7 @@ public class manager_Event {
         try {
             Statement stmt = null;
             stmt = dbConnection.createStatement();
-            String sql = "insert into Event (EveName, EveType, EveDateTime) values ('" + row.getItemName() + "'," + row.getItemCost() + "," + row.getItemPriority() + ");";
+            String sql = "insert into Event (EveName, EveType, EveDateTime) values ('" + row.getEventName() + "' , '" + row.getEventType() + "' , '" + row.getEventDateTime() + "');";
             stmt.execute(sql);
         }
         
@@ -49,7 +50,7 @@ public class manager_Event {
         try {
             Statement stmt = null;
             stmt = dbConnection.createStatement();
-            String sql = "DELETE FROM Event WHERE EveName = '" + row.getItemName() + "' AND EveType = " + row.getItemCost() + " AND EveDateTime = " + row.getItemPriority() + ";";
+            String sql = "DELETE FROM Event WHERE EveName = '" + row.getEventName() + "' AND EveType = '" + row.getEventType() + "' AND EveDateTime = '" + row.getEventDateTime() + "';";
             stmt.execute(sql);
         }
         
@@ -62,7 +63,7 @@ public class manager_Event {
         try {
             Statement stmt = null;
             stmt = dbConnection.createStatement();
-            String sql = "UPDATE Event Set EveName = '" + row.getNewItemName() + "' , EveType = " + row.getNewItemCost() + " , EveDateTime = " + row.getNewItemPriority() + " WHERE EveName = '" + row.getItemName() + "' AND EveType = " + row.getItemCost() + " AND EveDateTime = " + row.getItemPriority() + ";";
+            String sql = "UPDATE Event Set EveName = '" + row.getEventName()+ "' , EveType = '" + row.getEventType() + "' , EveDateTime = '" + row.getEventDateTime() + "' WHERE EveName = '" + row.getOldEventName() + "' AND EveType = '" + row.getOldEventType() + "' AND EveDateTime = '" + row.getOldEventDateTime() + "';";
             stmt.execute(sql);
         }
         

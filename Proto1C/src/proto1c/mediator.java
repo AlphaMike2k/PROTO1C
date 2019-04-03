@@ -96,12 +96,33 @@ public class mediator {
                 userClient.changeInterface(button);
                 userClient.showEvents(eventManager.getEvents());
                 break;
+            case "guiEventEdit":
+                userClient.changeInterface(button);
+                userClient.showEventEdit(newRow);
+                break;
+            case "saveEventEdit":
+                eventManager.updateEvent(newRow);
+                userClient.changeInterface("guiMainEventScreen");
+                userClient.showEvents(eventManager.getEvents());
+                break;
+            case "deleteEvent":
+                eventManager.deleteEvent(newRow);
+                userClient.showEvents(eventManager.getEvents());
+                break;
+            case "createEvent":
+                userClient.changeInterface(button);
+                break;
+            case "saveCreateEvent":
+                eventManager.insertNewEvent(newRow);
+                userClient.changeInterface("guiMainEventScreen");
+                break;
             case "remindersAdd":
                 reminderManager.insertNewReminder();
                 userClient.displayReminders(dateToSend, reminderManager.getReminders());
+                break;
             case "updateBudget":
                 budgetManager.updateBudget(newRow);
-//                
+                break;
             default:
                 userClient.displayAlert("Unknown button");
         }

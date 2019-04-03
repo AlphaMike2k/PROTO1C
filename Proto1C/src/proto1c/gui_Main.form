@@ -264,9 +264,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btnEditEvent" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnAddEvent" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnDeleteEvent" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnAddReminder" alignment="0" pref="116" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -298,15 +296,9 @@
                       <Component id="btnAddEvent" min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btnEditEvent" min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="btnEditTask" min="-2" pref="42" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnEditTask" min="-2" pref="42" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnDeleteEvent" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="btnDeleteTask" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnDeleteTask" min="-2" pref="43" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAddReminder" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
@@ -318,7 +310,7 @@
                   <Component id="btnImportLectures" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnBudget" max="32767" attributes="0"/>
+                      <Component id="btnBudget" pref="46" max="32767" attributes="0"/>
                       <Component id="btnBudgetList" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -333,16 +325,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddEventActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnEditEvent">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Edit Event"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnDeleteEvent">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Delete Event"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnAddReminder">
           <Properties>

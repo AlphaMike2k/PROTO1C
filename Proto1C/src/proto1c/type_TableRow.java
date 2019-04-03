@@ -1,4 +1,5 @@
 package proto1c;
+import java.sql.Timestamp;
 /**
  *
  * @author UP820734
@@ -13,6 +14,14 @@ public class type_TableRow {
     private String newItemName = null;
     private double newItemCost = 0.00;
     private int newItemPriority = 0;
+
+    private Timestamp eventDateTime = null;
+    private String eventType = null;
+    private String eventName = null;
+    private Timestamp oldEventDateTime = null;
+    private String oldEventType = null;
+    private String oldEventName = null;
+
     private String tblType = null;
     private String remName = null;
     private int remDay = 1;
@@ -24,17 +33,14 @@ public class type_TableRow {
     private String remDescription = null;
     private double newBudget = 0.00;
     
+    public type_TableRow() {
+        
+    }
+    
     public type_TableRow(String name, String date, String time) {
         tblTime = time;
         tblName = name;
         tblDate = date;
-    }
-    
-    public type_TableRow(String name, String date, String time, String type) {
-        tblTime = time;
-        tblName = name;
-        tblDate = date;
-        tblType = type;
     }
         
     public type_TableRow(String name, double cost, int priority) {
@@ -66,6 +72,21 @@ public class type_TableRow {
         newItemName = newName;
         newItemCost = newCost;
         newItemPriority = newPriority;
+    }
+    
+    public type_TableRow(String name, String type, Timestamp dateTime) {
+        eventName = name;
+        eventType = type;
+        eventDateTime = dateTime;
+    }
+    
+    public type_TableRow(String oldName, String oldType, Timestamp oldDateTime, String name, String type, Timestamp dateTime) {
+        eventName = name;
+        eventType = type;
+        eventDateTime = dateTime;
+        oldEventName = oldName;
+        oldEventType = oldType;
+        oldEventDateTime = oldDateTime;
     }
 
     public String getTblName() {
@@ -104,8 +125,28 @@ public class type_TableRow {
         return newItemPriority;
     }
 
-    public String getTblType() {
-        return tblType;
+    public Timestamp getEventDateTime() {
+        return eventDateTime;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public Timestamp getOldEventDateTime() {
+        return oldEventDateTime;
+    }
+
+    public String getOldEventType() {
+        return oldEventType;
+    }
+
+    public String getOldEventName() {
+        return oldEventName;
     }
 
     public double getNewBudget() {

@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proto1c;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.LocalTime;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +12,15 @@ import javax.swing.JOptionPane;
  * @author Michael
  */
 public class gui_EventNew extends javax.swing.JFrame {
-
+    private final manager_userClient userClientParent;
+    
     /**
      * Creates new form gui_EventNew
+     * @param userClient
      */
-    public gui_EventNew() {
+    public gui_EventNew(manager_userClient userClient) {       
+        userClientParent = userClient;
+        
         initComponents();
     }
 
@@ -50,6 +49,8 @@ public class gui_EventNew extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        evt_type = new javax.swing.JTextField();
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -124,6 +125,16 @@ public class gui_EventNew extends javax.swing.JFrame {
 
         jLabel6.setText(":");
 
+        jLabel7.setText("Event Type:");
+
+        evt_type.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        evt_type.setText("Type");
+        evt_type.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                evt_typeMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,6 +148,8 @@ public class gui_EventNew extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(evt_type, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(evt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +179,11 @@ public class gui_EventNew extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(evt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(evt_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -182,7 +199,7 @@ public class gui_EventNew extends javax.swing.JFrame {
                     .addComponent(evt_hour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(evt_min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(evt_create)
                     .addComponent(evt_cancel))
@@ -193,7 +210,6 @@ public class gui_EventNew extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void evt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_createActionPerformed
-        // TODO add your handling code here:
         final int reqFields = 6;
         int validFields = 0;
         String errorMessage = "";
@@ -311,6 +327,12 @@ public class gui_EventNew extends javax.swing.JFrame {
           SimpleDateFormat tf = new SimpleDateFormat("kk:mm");
           String date = df.format(aDate);
           String time = tf.format(Integer.valueOf(aTime));
+          
+          LocalDate ld = LocalDate.of(aYear, aMonth, aDay);
+          LocalTime lt = LocalTime.of(aHour, aMinute);
+          
+          Timestamp ts = Timestamp.valueOf(LocalDateTime.of(ld, lt));
+          userClientParent.saveNewEvent(new type_TableRow(evt_name.getText(),evt_type.getText(),ts));
         }
     }//GEN-LAST:event_evt_createActionPerformed
 
@@ -351,6 +373,10 @@ public class gui_EventNew extends javax.swing.JFrame {
         evt_year.setText("");
     }//GEN-LAST:event_evt_yearMouseClicked
 
+    private void evt_typeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_evt_typeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_evt_typeMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton evt_cancel;
@@ -360,6 +386,7 @@ public class gui_EventNew extends javax.swing.JFrame {
     private javax.swing.JTextField evt_min;
     private javax.swing.JTextField evt_month;
     private javax.swing.JTextField evt_name;
+    private javax.swing.JTextField evt_type;
     private javax.swing.JTextField evt_year;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
@@ -368,6 +395,7 @@ public class gui_EventNew extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
