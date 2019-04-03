@@ -22,6 +22,7 @@ public class type_TableRow {
     private int remMinute = 00;
     private String remLocation = null;
     private String remDescription = null;
+    private double newBudget = 0.00;
     
     public type_TableRow(String name, String date, String time) {
         tblTime = time;
@@ -41,6 +42,11 @@ public class type_TableRow {
         itemCost = cost;
         itemPriority = priority;
     }
+    
+    public type_TableRow(double budget){
+        newBudget = budget;
+    }
+   
     
     public type_TableRow(String name, int day, int month, int year, int hour, int minute, String location, String description){
         remName = name;
@@ -100,6 +106,42 @@ public class type_TableRow {
 
     public String getTblType() {
         return tblType;
+    }
+
+    public double getNewBudget() {
+        return newBudget;
+    }
+
+    public String getRemName() {
+        return remName;
+    }
+
+    public int getRemDay() {
+        return remDay;
+    }
+
+    public int getRemMonth() {
+        return remMonth;
+    }
+
+    public int getRemYear() {
+        return remYear;
+    }
+
+    public int getRemHour() {
+        return remHour;
+    }
+
+    public int getRemMinute() {
+        return remMinute;
+    }
+
+    public String getRemLocation() {
+        return remLocation;
+    }
+
+    public String getRemDescription() {
+        return remDescription;
     }
 
 }

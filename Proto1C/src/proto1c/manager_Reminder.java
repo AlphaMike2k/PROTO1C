@@ -24,8 +24,8 @@ public class manager_Reminder {
     private String reminderLocation;
     private String reminderDescription;
 
-    private mediator mediatorParent = null;
-    private Connection dbConnection = null;
+    private final mediator mediatorParent;
+    private final Connection dbConnection;
 
     public manager_Reminder(mediator mediator, Connection conn) {
 	        mediatorParent = mediator;
@@ -176,7 +176,7 @@ public class manager_Reminder {
                 statement = dbConnection.createStatement();
                 String sql = "DELETE FROM Reminder WHERE reminderName = " + getReminderName() + "' AND reminderDay = " + getReminderDay() + " AND reminderMonth = " + getReminderMonth()
                         + " AND reminderYear = " + getReminderYear() + "' AND reminderHour = " + getReminderHour() + " AND reminderMinute = " + getReminderMinute()
-                        + " AND reminderLocation = " + getLocation() + "' AND reminderHour = " + getReminderHour() + " AND reminderDescription = " + getDescription() + ";";
+                        + " AND reminderLocation = " + getLocation() + " AND reminderDescription = " + getDescription() + ";";
                 statement.execute(sql);
             }
 
@@ -184,4 +184,20 @@ public class manager_Reminder {
                 se.printStackTrace();
             }
         }
+    
+    public void updateReminder(type_TableRow row){
+        try {
+                Statement statement = null;
+                statement = dbConnection.createStatement();
+                String sql = "UPDATE Reminder Set reminderName = "+ row.getRemName() + ", reminderDay = " + row.getRemDay() + " , reminderMonth = " + row.getRemMonth() + " , reminderYear = " + row.getRemYear() + 
+                        " , reminderHour = " + row.getRemHour() + " , reminderMinute = " + row.getRemMinute() + " , reminderLocation = " + row.getRemLocation() + " , reminderDescription = " + row.getRemDescription() + 
+                        "WHERE reminderName = " + getReminderName() + "' AND reminderDay = " + getReminderDay() + " AND reminderMonth = " + getReminderMonth()
+                        + " AND reminderYear = " + getReminderYear() + "' AND reminderHour = " + getReminderHour() + " AND reminderMinute = " + getReminderMinute()
+                        + " AND reminderLocation = " + getLocation() +  " AND reminderDescription = " + getDescription() + ";";
+                statement.execute(sql);
+    }
+        catch(SQLException se){
+                se.printStackTrace();
+            }
+    }
 }

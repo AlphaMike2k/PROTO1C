@@ -100,7 +100,7 @@ public class mediator {
                 reminderManager.insertNewReminder();
                 userClient.displayReminders(dateToSend, reminderManager.getReminders());
             case "updateBudget":
-                budgetManager.updateBudget();
+                budgetManager.updateBudget(newRow);
 //                
             default:
                 userClient.displayAlert("Unknown button");
