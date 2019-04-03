@@ -96,6 +96,15 @@ public class mediator {
                 userClient.changeInterface(button);
                 userClient.showEvents(eventManager.getEvents());
                 break;
+            case "guiEventEdit":
+                userClient.changeInterface(button);
+                userClient.showEventEdit(newRow);
+                break;
+            case "saveEventEdit":
+                eventManager.updateEvent(newRow);
+                userClient.changeInterface("guiMainEventScreen");
+                userClient.showEvents(eventManager.getEvents());
+                break;
             default:
                 userClient.displayAlert("Unknown button");
         }

@@ -7,20 +7,24 @@ package proto1c;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import javax.swing.JOptionPane;
+import java.sql.Timestamp;
+import java.time.*;
 
 /**
  *
  * @author Michael
  */
 public class gui_Eventedit extends javax.swing.JFrame {
-
+    private final manager_userClient userClientParent;
+    private type_TableRow displayedEvent;
+    
     /**
      * Creates new form gui_Eventedit
+     * @param userClient
      */
-    public gui_Eventedit() {
+    public gui_Eventedit(manager_userClient userClient) {
+        userClientParent = userClient;
         initComponents();
     }
 
@@ -187,9 +191,20 @@ public class gui_Eventedit extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void loadEvent(type_TableRow eventToDisplay) {
+        displayedEvent = eventToDisplay;
+        LocalDateTime dt = eventToDisplay.getEventDateTime().toLocalDateTime();
+        
+        edit_name.setText(eventToDisplay.getEventName());
+        edit_day.setText(String.valueOf(dt.getDayOfMonth()));
+        edit_month.setText(String.valueOf(dt.getMonthValue()));
+        edit_year.setText(String.valueOf(dt.getYear()));
+        edit_hour.setText(String.valueOf(dt.getHour()));
+        edit_min.setText(String.valueOf(dt.getMinute()));
+        
+    }
     private void editsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editsaveActionPerformed
-        // TODO add your handling code here:
         final int reqFields = 6;
         int validFields = 0;
         String errorMessage = "";
@@ -300,13 +315,19 @@ public class gui_Eventedit extends javax.swing.JFrame {
        // System.out.println(aName);
         //System.out.println(aDate);
         //System.out.println(aTime);
-          JOptionPane.showMessageDialog(null, "Event has been created.", "Event Created", JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(null, "Event has been updated.", "Event Updated", JOptionPane.INFORMATION_MESSAGE);
           aDate = (aDay + aMonth + aYear);
           aTime = (aHour + aMinute);        
           SimpleDateFormat df = new SimpleDateFormat("DD/MM/YYYY");
           SimpleDateFormat tf = new SimpleDateFormat("kk:mm");
           String date = df.format(aDate);
           String time = tf.format(Integer.valueOf(aTime));
+          
+          LocalDate ld = LocalDate.of(aYear, aMonth, aDay);
+          LocalTime lt = LocalTime.of(aHour, aMinute);
+          
+          Timestamp ts = Timestamp.valueOf(LocalDateTime.of(ld, lt));
+          userClientParent.saveEventEdit(new type_TableRow(displayedEvent.getEventName(),displayedEvent.getEventType(),displayedEvent.getEventDateTime(),edit_name.getText(),displayedEvent.getEventType(),ts));
         }
     }//GEN-LAST:event_editsaveActionPerformed
 
@@ -344,7 +365,8 @@ public class gui_Eventedit extends javax.swing.JFrame {
         //Closes when canceled
         this.dispose();
     }//GEN-LAST:event_editcancelActionPerformed
-
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField edit_day;

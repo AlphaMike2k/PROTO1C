@@ -15,6 +15,9 @@ public class manager_userClient {
     private final gui_BudgetList budgetList = new gui_BudgetList(this);
     private final gui_BLEdit blEdit = new gui_BLEdit(this);
     private final gui_Event mainEvent = new gui_Event(this);
+    //private final gui_EventNew newEvent = new gui_EventNew(this);
+    private final gui_Eventedit editEvent = new gui_Eventedit(this);
+    
     
     private final mediator mediatorParent;
     private final Connection dbConnection;
@@ -56,6 +59,9 @@ public class manager_userClient {
             mainEvent.setVisible(true);
             currentGui = mainEvent;
             break;
+        case "guiEventEdit":
+            editEvent.setVisible(true);
+            currentGui = editEvent;
         default: 
         
         }
@@ -133,8 +139,21 @@ public class manager_userClient {
     }
     
     public void showEvents(ResultSet rs){
-        mainEvent.loadList(formatData(rs,"EveName", "EveType", "EveDateTime"));
+        mainEvent.loadList(formatEventData(rs,"EveName", "EveType", "EveDateTime"));
     }
+    
+    public void editEvent(type_TableRow row) {
+         mediatorParent.buttonPressed("guiEventEdit",0,row);
+    }
+    
+    public void showEventEdit(type_TableRow row) {
+        editEvent.loadEvent(row);
+    }
+    
+    public void saveEventEdit(type_TableRow row) {
+        mediatorParent.buttonPressed("saveEventEdit", 0, row);
+    }
+    
     /**
      * Triggers method in mediator that user has pressed 'Back' button on a GUI
      */
@@ -286,40 +305,40 @@ public class manager_userClient {
         return null;
     }
     
-    private ArrayList <type_TableRow> formatData(ResultSet data, String colName, String colName2, String colName3, String colName4) {
+    private ArrayList <type_TableRow> formatEventData(ResultSet data, String colName, String colName2, String colName3) {
         ArrayList <String> dsNamesList = new ArrayList<String>();
-        ArrayList <Double> dsCostList = new ArrayList<Double>();
-        ArrayList <Integer> dsPriorityList = new ArrayList<Integer>();
+        ArrayList <String> dsTypeList = new ArrayList<String>();
+        ArrayList <Timestamp> dsTimeList = new ArrayList<Timestamp>();
         
         ArrayList<type_TableRow> tableRows= new ArrayList<type_TableRow>();
         
         try{
             while (data.next()) {
                 dsNamesList.add(data.getString(colName));
-                dsCostList.add(data.getDouble(colName2));
-                dsPriorityList.add(data.getInt(colName3));
+                dsTypeList.add(data.getString(colName2));
+                dsTimeList.add(data.getTimestamp(colName3));
             }
             
-            for (int i = 1; i < dsPriorityList.size(); i++) {
+            for (int i = 1; i < dsTimeList.size(); i++) {
                 int insertAt = i;
                 String curName = dsNamesList.get(i);
-                double curCost = dsCostList.get(i);
-                int curPriority = dsPriorityList.get(i);
+                String curType = dsTypeList.get(i);
+                Timestamp curTime = dsTimeList.get(i);
                 
-                while (insertAt > 0 && dsPriorityList.get(insertAt-1) > curPriority) {
-                    dsPriorityList.set(insertAt, dsPriorityList.get(insertAt-1));
-                    dsCostList.set(insertAt, dsCostList.get(insertAt-1));
+                while (insertAt > 0 && dsTimeList.get(insertAt-1).after(curTime)) {
+                    dsTimeList.set(insertAt, dsTimeList.get(insertAt-1));
+                    dsTypeList.set(insertAt, dsTypeList.get(insertAt-1));
                     dsNamesList.set(insertAt, dsNamesList.get(insertAt-1));
                     insertAt --;
                 }
                 
-                dsPriorityList.set(insertAt, curPriority);
-                dsCostList.set(insertAt, curCost);
+                dsTimeList.set(insertAt, curTime);
+                dsTypeList.set(insertAt, curType);
                 dsNamesList.set(insertAt, curName);
             }
             
-            for (int j = 0; j < dsPriorityList.size(); j++) {
-                tableRows.add(new type_TableRow(dsNamesList.get(j),dsCostList.get(j),dsPriorityList.get(j)));
+            for (int j = 0; j < dsTimeList.size(); j++) {
+                tableRows.add(new type_TableRow(dsNamesList.get(j),dsTypeList.get(j),dsTimeList.get(j)));
             }
             
             return tableRows;

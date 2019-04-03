@@ -13,6 +13,7 @@ public class manager_Event {
     private final mediator mediatorParent;
     private final Connection dbConnection;
     
+    
     public manager_Event(mediator mediator, Connection conn) {
         mediatorParent = mediator;
         dbConnection = conn;
@@ -62,7 +63,7 @@ public class manager_Event {
         try {
             Statement stmt = null;
             stmt = dbConnection.createStatement();
-            String sql = "UPDATE Event Set EveName = '" + row.getNewItemName() + "' , EveType = " + row.getNewItemCost() + " , EveDateTime = " + row.getNewItemPriority() + " WHERE EveName = '" + row.getItemName() + "' AND EveType = " + row.getItemCost() + " AND EveDateTime = " + row.getItemPriority() + ";";
+            String sql = "UPDATE Event Set EveName = '" + row.getEventName()+ "' , EveType = '" + row.getEventType() + "' , EveDateTime = '" + row.getEventDateTime() + "' WHERE EveName = '" + row.getOldEventName() + "' AND EveType = '" + row.getOldEventType() + "' AND EveDateTime = '" + row.getOldEventDateTime() + "';";
             stmt.execute(sql);
         }
         
