@@ -68,7 +68,7 @@ public class Proto1C {
             
             stmt.execute("create table Event(EveID AUTOINCREMENT PRIMARY KEY, EveName char(30) not null,EveType char(30) not null,EveDateTime DateTime not null);");
             
-            stmt.execute("create table Reminder(RemID AUTOINCREMENT PRIMARY KEY,RemName char(30) not null, RemDateTime DateTime not null);");
+            stmt.execute("create table Reminder(RemID AUTOINCREMENT PRIMARY KEY,RemName char(30) not null, RemDateTime DateTime not null, RemLocation char(30) not null, RemDescription char(30) not null);");
             
             stmt.execute("create table Task(TaskID AUTOINCREMENT PRIMARY KEY, TaskName char(30) not null, TaskDateTime DateTime not null, TaskCompleted INTEGER NOT NULL);");
             
@@ -98,8 +98,8 @@ public class Proto1C {
             stmt.execute("insert into Event(EveName, EveType, EveDateTime) values ('Basketball', 'Social', '2019-03-28 10:00:00');");
             stmt.execute("insert into Event(EveName, EveType, EveDateTime) values ('Basketball2', 'Social', '2019-03-28 10:00:00');");
             
-            stmt.execute("insert into Reminder(RemName, RemDateTime) values ('Test', '2019-03-28 10:00:00');");
-            stmt.execute("insert into Reminder(RemName, RemDateTime) values ('Test2', '2019-03-28 10:00:00');");
+            stmt.execute("insert into Reminder(RemName, RemDateTime, RemLocation, RemDescription) values ('Test', '2019-03-28 10:00:00', 'London', 'INSE test');");
+            stmt.execute("insert into Reminder(RemName, RemDateTime, RemLocation, RemDescription) values ('Test2', '2019-03-28 10:00:00', 'Portsmouth', 'Mathfun Test');");
             
             stmt.execute("insert into Task(TaskName, TaskDateTime, TaskCompleted) values ('Shopping', '2019-03-28 10:00:00', 0);");
             stmt.execute("insert into Task(TaskName, TaskDateTime, TaskCompleted) values ('Shopping2', '2019-03-28 10:00:00', 0);");

@@ -14,6 +14,14 @@ public class type_TableRow {
     private double newItemCost = 0.00;
     private int newItemPriority = 0;
     private String tblType = null;
+    private String remName = null;
+    private int remDay = 1;
+    private int remMonth = 1;
+    private int remYear = 2019;
+    private int remHour = 00;
+    private int remMinute = 00;
+    private String remLocation = null;
+    private String remDescription = null;
     
     public type_TableRow(String name, String date, String time) {
         tblTime = time;
@@ -32,6 +40,17 @@ public class type_TableRow {
         itemName = name;
         itemCost = cost;
         itemPriority = priority;
+    }
+    
+    public type_TableRow(String name, int day, int month, int year, int hour, int minute, String location, String description){
+        remName = name;
+        remDay = day;
+        remMonth = month;
+        remYear = year;
+        remHour = hour;
+        remMinute = minute;
+        remLocation = location;
+        remDescription = description;
     }
     
     public type_TableRow(String name, double cost, int priority, String newName, double newCost, int newPriority) {
@@ -82,7 +101,5 @@ public class type_TableRow {
     public String getTblType() {
         return tblType;
     }
-    
-    
-    
+
 }

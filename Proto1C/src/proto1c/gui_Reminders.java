@@ -2,6 +2,11 @@ package proto1c;
 import java.text.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -41,13 +46,13 @@ public class gui_Reminders extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        locationText = new javax.swing.JTextPane();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        nameText = new javax.swing.JTextPane();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
+        descriptionText = new javax.swing.JTextPane();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -142,7 +147,7 @@ public class gui_Reminders extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,17 +169,17 @@ public class gui_Reminders extends javax.swing.JFrame {
         jLabel6.setText("Name");
         jLabel6.setToolTipText("");
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(locationText);
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel7.setText("Description");
 
-        jScrollPane2.setViewportView(jTextPane2);
+        jScrollPane2.setViewportView(nameText);
 
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel8.setText("Location");
 
-        jScrollPane3.setViewportView(jTextPane3);
+        jScrollPane3.setViewportView(descriptionText);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,6 +233,11 @@ public class gui_Reminders extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jButton3.setText("Add Reminder");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -247,7 +257,7 @@ public class gui_Reminders extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -328,9 +338,23 @@ public class gui_Reminders extends javax.swing.JFrame {
         userClient.back();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String remName = nameText.getText();
+        String remLocation = locationText.getText();
+        String remDescription = descriptionText.getText();
+        int remDay = Integer.valueOf(day.getValue().toString());
+        int remMonth = Integer.valueOf(month.getValue().toString());
+        int remYear = Integer.valueOf(year.getValue().toString());
+        int remHour = Integer.valueOf(hour.getValue().toString());
+        int remMinute = Integer.valueOf(minute.getValue().toString());
+        
+        userClient.remindersAdd(new type_TableRow(remName, remDay, remMonth, remYear, remHour, remMinute, remLocation, remDescription));
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner day;
+    private javax.swing.JTextPane descriptionText;
     private javax.swing.JSpinner hour;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -349,11 +373,10 @@ public class gui_Reminders extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
+    private javax.swing.JTextPane locationText;
     private javax.swing.JSpinner minute;
     private javax.swing.JSpinner month;
+    private javax.swing.JTextPane nameText;
     private javax.swing.JSpinner year;
     // End of variables declaration//GEN-END:variables
 }
