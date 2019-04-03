@@ -24,8 +24,8 @@ public class manager_Reminder {
     private String reminderLocation;
     private String reminderDescription;
 
-    private mediator mediatorParent = null;
-    private Connection dbConnection = null;
+    private final mediator mediatorParent;
+    private final Connection dbConnection;
 
     public manager_Reminder(mediator mediator, Connection conn) {
 	        mediatorParent = mediator;
@@ -71,7 +71,6 @@ public class manager_Reminder {
     
     /**
              * Method that returns the day that the reminder is set.
-         * @param reminderDay
              @return Returns remnderDay.
              */
     public int getReminderDay() {
@@ -80,7 +79,6 @@ public class manager_Reminder {
 
     /**
          * Method that returns the month that the reminder is set.
-     * @param reminderMonth
          @return Returns reminderMonth.
          */
     public int getReminderMonth() {
@@ -89,7 +87,6 @@ public class manager_Reminder {
 
     /**
          * Method that returns the year that the reminder is set.
-     * @param reminderYear
          @return Returns reminderYear.
          */
     public int getReminderYear() {
@@ -98,7 +95,6 @@ public class manager_Reminder {
 
     /**
          * Method that returns the hour that the reminder is set.
-     * @param reminderHour
          @return Returns reminderHour.
          */
     public int getReminderHour() {
@@ -107,7 +103,6 @@ public class manager_Reminder {
     
     /**
          * Method that returns the minute that the reminder is set.
-     * @param reminderMinute
          @return Returns reminderMinute.
          */
     public int getReminderMinute() {
@@ -116,7 +111,6 @@ public class manager_Reminder {
     
     /**
          * Method that returns the name of the reminder.
-     * @param name
          @return Returns name.
          */
     public String getReminderName(){
@@ -125,7 +119,6 @@ public class manager_Reminder {
 
     /**
          * Method that returns the location of the reminder.
-     * @param location
          @return Returns location.
          */
     public String getLocation(){
@@ -134,7 +127,6 @@ public class manager_Reminder {
 
     /**
          * Method that returns the description of the reminder.
-     * @param description
          @return Returns description.
          */
     public String getDescription(){
@@ -143,7 +135,6 @@ public class manager_Reminder {
 
     /**
          * Method that gets data from the database.
-         @return Returns description.
          */
     public ResultSet getReminders() {
         try{
@@ -166,7 +157,7 @@ public class manager_Reminder {
             try {
                 Statement statement = null;
                 statement = dbConnection.createStatement();
-                String sql = "insert into Reminder(reminderName, reminderDay, reminderMonth, reminderYear, reminderHour, reminderMinute, reminderLocation, reminderDescription) values "
+                String sql = "insert into Reminder(RemName, RemDateTime, RemLocation, RemDescription) values "
                         + "('" + getReminderName() + "'," + getReminderDay() + "," + getReminderMonth() + "," + getReminderYear() + getReminderHour() + "," + getReminderMinute() + "," + getLocation() + "," + getDescription() + ");";
                 statement.execute(sql);
             }
@@ -185,7 +176,7 @@ public class manager_Reminder {
                 statement = dbConnection.createStatement();
                 String sql = "DELETE FROM Reminder WHERE reminderName = " + getReminderName() + "' AND reminderDay = " + getReminderDay() + " AND reminderMonth = " + getReminderMonth()
                         + " AND reminderYear = " + getReminderYear() + "' AND reminderHour = " + getReminderHour() + " AND reminderMinute = " + getReminderMinute()
-                        + " AND reminderLocation = " + getLocation() + "' AND reminderHour = " + getReminderHour() + " AND reminderDescription = " + getDescription() + ";";
+                        + " AND reminderLocation = " + getLocation() + " AND reminderDescription = " + getDescription() + ";";
                 statement.execute(sql);
             }
 
@@ -193,4 +184,20 @@ public class manager_Reminder {
                 se.printStackTrace();
             }
         }
+    
+    public void updateReminder(type_TableRow row){
+        try {
+                Statement statement = null;
+                statement = dbConnection.createStatement();
+                String sql = "UPDATE Reminder Set reminderName = "+ row.getRemName() + ", reminderDay = " + row.getRemDay() + " , reminderMonth = " + row.getRemMonth() + " , reminderYear = " + row.getRemYear() + 
+                        " , reminderHour = " + row.getRemHour() + " , reminderMinute = " + row.getRemMinute() + " , reminderLocation = " + row.getRemLocation() + " , reminderDescription = " + row.getRemDescription() + 
+                        "WHERE reminderName = " + getReminderName() + "' AND reminderDay = " + getReminderDay() + " AND reminderMonth = " + getReminderMonth()
+                        + " AND reminderYear = " + getReminderYear() + "' AND reminderHour = " + getReminderHour() + " AND reminderMinute = " + getReminderMinute()
+                        + " AND reminderLocation = " + getLocation() +  " AND reminderDescription = " + getDescription() + ";";
+                statement.execute(sql);
+    }
+        catch(SQLException se){
+                se.printStackTrace();
+            }
+    }
 }
