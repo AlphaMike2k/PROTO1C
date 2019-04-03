@@ -235,9 +235,7 @@ public class gui_Event extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-            //label1.setVisible(false);
-            btnEdit.setVisible(false);
-            btnDelete.setVisible(false);
+            userClientParent.eventDelete(selectedRow);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -247,9 +245,7 @@ public class gui_Event extends javax.swing.JFrame {
     }//GEN-LAST:event_evt_backActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        gui_EventNew n= new gui_EventNew();
-        n.setVisible(true);
+        userClientParent.createEvent();
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked

@@ -15,7 +15,7 @@ public class manager_userClient {
     private final gui_BudgetList budgetList = new gui_BudgetList(this);
     private final gui_BLEdit blEdit = new gui_BLEdit(this);
     private final gui_Event mainEvent = new gui_Event(this);
-    //private final gui_EventNew newEvent = new gui_EventNew(this);
+    private final gui_EventNew newEvent = new gui_EventNew(this);
     private final gui_Eventedit editEvent = new gui_Eventedit(this);
     
     
@@ -62,8 +62,13 @@ public class manager_userClient {
         case "guiEventEdit":
             editEvent.setVisible(true);
             currentGui = editEvent;
+            break;
+        case "createEvent":
+            newEvent.setVisible(true);
+            currentGui = newEvent;
+            break;
         default: 
-        
+            displayAlert("No GUI found");
         }
         
     }
@@ -152,6 +157,18 @@ public class manager_userClient {
     
     public void saveEventEdit(type_TableRow row) {
         mediatorParent.buttonPressed("saveEventEdit", 0, row);
+    }
+    
+    public void eventDelete(type_TableRow row) {
+        mediatorParent.buttonPressed("deleteEvent", 0, row);
+    }
+    
+    public void createEvent() {
+        mediatorParent.buttonPressed("createEvent", 0, null);
+    }
+    
+    public void saveNewEvent(type_TableRow row) {
+        mediatorParent.buttonPressed("saveCreateEvent", 0, row);
     }
     
     /**
