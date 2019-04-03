@@ -248,13 +248,13 @@ public class gui_EventNew extends javax.swing.JFrame {
             try{
                 int yy = Integer.parseInt(evt_year.getText());
                 if(yy < 2019 || yy > 2099 ){
-                       errorMessage = errorMessage.concat("Month not valid.\n");
+                       errorMessage = errorMessage.concat("Year not valid.\n");
                }else{
                    aYear = yy;
                    validFields++;
                }
             } catch(NumberFormatException e){
-                errorMessage = errorMessage.concat("Month is not a valid number.\n");
+                errorMessage = errorMessage.concat("Year is not a valid number.\n");
             }
         }      
         

@@ -17,7 +17,8 @@ public class manager_userClient {
     private final gui_Event mainEvent = new gui_Event(this);
     private final gui_EventNew newEvent = new gui_EventNew(this);
     private final gui_Eventedit editEvent = new gui_Eventedit(this);
-    
+    private final gui_Reminders reminders = new gui_Reminders(this);
+    private final gui_Budget budget = new gui_Budget(this);
     
     private final mediator mediatorParent;
     private final Connection dbConnection;
@@ -67,6 +68,12 @@ public class manager_userClient {
             newEvent.setVisible(true);
             currentGui = newEvent;
             break;
+        case "guiReminder":
+            reminders.setVisible(true);
+            currentGui = reminders;
+        case "guiBudget":
+            budget.setVisible(true);
+            currentGui = budget;
         default: 
             displayAlert("No GUI found");
         }
@@ -216,6 +223,21 @@ public class manager_userClient {
         mediatorParent.buttonPressed("calendarClicked", clickedDay,null);
     }
     
+    /**
+     * Triggers the Reminder GUI for the reminder to be added.
+     * @param row
+     */
+    public void remindersAdd(type_TableRow row) {
+        mediatorParent.buttonPressed("remindersAdd", 0, row);
+    }
+    
+    /**
+     * Triggers the Budget GUI for the budget to be updated.
+     * @param row
+     */
+    public void updateBudget(type_TableRow row){
+        mediatorParent.buttonPressed("updateBudget", 0, null);
+    }
     
     /**
      * 
@@ -374,4 +396,5 @@ public class manager_userClient {
     public void displayAlert(String message) {
         JOptionPane.showConfirmDialog(null, message, "Error", -1);
     }
+
 }

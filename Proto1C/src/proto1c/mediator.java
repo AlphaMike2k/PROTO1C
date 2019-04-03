@@ -25,7 +25,7 @@ public class mediator {
         userClient = new manager_userClient(this,dbConnection);
         reminderManager = new manager_Reminder(this,dbConnection);
         taskManager = new manager_Task(this,dbConnection);
-        budgetManager = new manager_Budget();
+        budgetManager = new manager_Budget(this,dbConnection);
         budgetList = new manager_BudgetList(this,dbConnection);
         eventManager = new manager_Event(this,dbConnection);
     }
@@ -115,6 +115,13 @@ public class mediator {
             case "saveCreateEvent":
                 eventManager.insertNewEvent(newRow);
                 userClient.changeInterface("guiMainEventScreen");
+                break;
+            case "remindersAdd":
+                reminderManager.insertNewReminder();
+                userClient.displayReminders(dateToSend, reminderManager.getReminders());
+                break;
+            case "updateBudget":
+                budgetManager.updateBudget(newRow);
                 break;
             default:
                 userClient.displayAlert("Unknown button");

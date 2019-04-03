@@ -2,10 +2,15 @@ package proto1c;
 import java.text.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
- *
- * @author UP875166
+ **Class that creates the GUI for the Reminders.
+ **@author UP875166
  */
 public class gui_Reminders extends javax.swing.JFrame {
     private final manager_userClient userClient;
@@ -41,16 +46,16 @@ public class gui_Reminders extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        locationText = new javax.swing.JTextPane();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        nameText = new javax.swing.JTextPane();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        descriptionText = new javax.swing.JTextPane();
+        backButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,7 +147,7 @@ public class gui_Reminders extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(year, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,17 +169,17 @@ public class gui_Reminders extends javax.swing.JFrame {
         jLabel6.setText("Name");
         jLabel6.setToolTipText("");
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(locationText);
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel7.setText("Description");
 
-        jScrollPane2.setViewportView(jTextPane2);
+        jScrollPane2.setViewportView(nameText);
 
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel8.setText("Location");
 
-        jScrollPane3.setViewportView(jTextPane3);
+        jScrollPane3.setViewportView(descriptionText);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,39 +220,49 @@ public class gui_Reminders extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton1.setText("Clear Form");
+        cancelButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jButton3.setText("Add Reminder");
+        addButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        addButton.setText("Add Reminder");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton2)
+                .addComponent(backButton)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -256,7 +271,7 @@ public class gui_Reminders extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton2)
+                .addComponent(backButton)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -268,8 +283,8 @@ public class gui_Reminders extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -324,17 +339,156 @@ public class gui_Reminders extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_minuteStateChanged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        //goes back to the main gui
         userClient.back();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    int validFields = 0;
+    String errorMessage = "";
+        
+    //Validation to ensure entered fields are correct.
+        if(nameText.getText().isEmpty()){
+            errorMessage = errorMessage.concat("Name field is missing.\n");
+        }else{
+            String name = nameText.getText();
+            validFields++;
+        }
+        
+        //Validation to ensure entered fields are correct.
+        if(locationText.getText().isEmpty()){
+            errorMessage = errorMessage.concat("Location field is missing.\n");
+        }else{
+            String location = locationText.getText();
+            validFields++;
+        }
+        
+        //Validation to ensure entered fields are correct.
+        if(descriptionText.getText().isEmpty()){
+            errorMessage = errorMessage.concat("Description field is missing.\n");
+        }else{
+            String description = descriptionText.getText();
+            validFields++;
+        }
+        
+        //Ensure Day field is filled
+        if(day.getValue().equals(00)){
+            errorMessage = errorMessage.concat("Day field is missing.\n");
+        }else{
+            //Attempt to ensure day is valid and is a number
+            try{
+               int value = (Integer) day.getValue();
+               if(value <=0 || value >31){
+                    errorMessage = errorMessage.concat("Day not valid.\n");
+                }else{
+                    int remDay = value;
+                    validFields++;
+                }
+            } catch(NumberFormatException e){
+                errorMessage = errorMessage.concat("Day is not a valid number.\n");
+            }
+        }
+
+        //Ensure Month field is correct
+        if(month.getValue().equals(00)){
+            errorMessage = errorMessage.concat("Month field is missing.\n");
+        }else{
+            //Attempt to ensure month is valid and is a number
+            try{
+                int value = (Integer) month.getValue();
+                if(value <=0 || value >12){
+                       errorMessage = errorMessage.concat("Month not valid.\n");
+               }else{
+                   int remMonth = value;
+                   validFields++;
+               }
+            } catch(NumberFormatException e){
+                errorMessage = errorMessage.concat("Month is not a valid number.\n");
+            }
+        }
+
+        
+        //Ensure Year field is correct
+        if(year.getValue().equals(0000)){
+            errorMessage = errorMessage.concat("Year field is missing.\n");
+        }else{
+            //Attempt to ensure year is valid and is a number
+            try{
+                int value = (Integer) year.getValue();
+                if(value < 2019 || value > 2099 ){
+                       errorMessage = errorMessage.concat("Year not valid.\n");
+               }else{
+                   int remYear = value;
+                   validFields++;
+               }
+            } catch(NumberFormatException e){
+                errorMessage = errorMessage.concat("Year is not a valid number.\n");
+            }
+        }      
+
+                  //Ensure hour field is correct
+          if(hour.getValue().equals("")){
+            errorMessage = errorMessage.concat("Hour field is missing.\n");
+        }else{
+            //Attempt to ensure hour is valid and is a number
+            try{
+               int value = (Integer) hour.getValue();
+               if(value < 0 || value > 24){
+                    errorMessage = errorMessage.concat("Hour not valid.\n");
+                }else{
+                    int remHour = value;
+                    validFields++;
+                }
+            } catch(NumberFormatException e){
+                errorMessage = errorMessage.concat("Hour is not a valid number.\n");
+            }
+        }
+          
+            //Ensure Minute field is correct
+          if(minute.getValue().equals("")){
+            errorMessage = errorMessage.concat("Minute field is missing.\n");
+        }else{
+            //Attempt to ensure hour is valid and is a number
+            try{
+               int value = (Integer) minute.getValue();
+               if(value < 00 || value > 59){
+                    errorMessage = errorMessage.concat("Hour not valid.\n");
+                }else{
+                    int remMinute = value;
+                    validFields++;
+                }
+            } catch(NumberFormatException e){
+                errorMessage = errorMessage.concat("Minute is not a valid number.\n");
+            }
+        }
+        
+          
+        
+//        String remName = nameText.getText();
+//        String remLocation = locationText.getText();
+//        String remDescription = descriptionText.getText();
+//        int remDay = Integer.valueOf(day.getValue().toString());
+//        int remMonth = Integer.valueOf(month.getValue().toString());
+//        int remYear = Integer.valueOf(year.getValue().toString());
+//        int remHour = Integer.valueOf(hour.getValue().toString());
+//        int remMinute = Integer.valueOf(minute.getValue().toString());
+//        userClient.remindersAdd(new type_TableRow(remName, remDay, remMonth, remYear, remHour, remMinute, remLocation, remDescription));
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        //closes the window and goes back
+        userClient.back();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton backButton;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JSpinner day;
+    private javax.swing.JTextPane descriptionText;
     private javax.swing.JSpinner hour;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -349,11 +503,19 @@ public class gui_Reminders extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
+    private javax.swing.JTextPane locationText;
     private javax.swing.JSpinner minute;
     private javax.swing.JSpinner month;
+    private javax.swing.JTextPane nameText;
     private javax.swing.JSpinner year;
     // End of variables declaration//GEN-END:variables
+
+    private String remName;
+    private String remLocation;
+    private String remDescription;
+    private int remDay;
+    private int remMonth;
+    private int remYear;
+    private int remHour;
+    private int remMinute;
 }
