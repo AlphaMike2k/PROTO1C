@@ -369,8 +369,7 @@ public class gui_EventNew extends javax.swing.JFrame {
     private void evt_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_cancelActionPerformed
         //Closes when clicked on
         this.dispose();
-        gui_Event e= new gui_Event();
-        e.setVisible(true);
+        userClientParent.back();
     }//GEN-LAST:event_evt_cancelActionPerformed
 
     private void evt_monthMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_evt_monthMouseClicked
@@ -385,6 +384,7 @@ public class gui_EventNew extends javax.swing.JFrame {
 
     private void evt_typeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_evt_typeMouseClicked
         // TODO add your handling code here:
+        evt_type.setText("");
     }//GEN-LAST:event_evt_typeMouseClicked
 
     private void evt_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_typeActionPerformed
