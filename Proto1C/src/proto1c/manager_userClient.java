@@ -251,8 +251,8 @@ public class manager_userClient {
      * Triggers the Reminder GUI for the reminder to be added.
      * @param row
      */
-    public void remindersAdd() {
-        mediatorParent.buttonPressed("remindersAdd", 0, null);
+    public void remindersAdd(type_TableRow row) {
+        mediatorParent.buttonPressed("remindersAdd", 0, row);
     }
     
     /**
