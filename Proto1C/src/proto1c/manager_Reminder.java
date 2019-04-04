@@ -152,12 +152,11 @@ public class manager_Reminder {
     /**
          * Method that inserts a new reminder.
          */
-    public void insertNewReminder() {
+    public void insertNewReminder(type_TableRow row) {
             try {
                 Statement statement = null;
                 statement = dbConnection.createStatement();
-                String sql = "insert into Reminder(RemName, RemDateTime, RemLocation, RemDescription) values "
-                        + "('" + getReminderName() + "'," + getReminderDay() + "," + getReminderMonth() + "," + getReminderYear() + getReminderHour() + "," + getReminderMinute() + "," + getLocation() + "," + getDescription() + ");";
+                String sql = "insert into Reminder(RemName, RemDateTime, RemLocation, RemDescription) values ('" + row.getRemName() + "' , '" + row.getRemDateTime() + "' , '" + row.getRemLocation() + "' , '" + row.getRemDescription() + "');";
                 statement.execute(sql);
             }
 
@@ -169,13 +168,11 @@ public class manager_Reminder {
     /**
          * Method that removes a reminder.
          */
-    public void removeReminder() {
+    public void removeReminder(type_TableRow row) {
             try {
                 Statement statement = null;
                 statement = dbConnection.createStatement();
-                String sql = "DELETE FROM Reminder WHERE reminderName = " + getReminderName() + "' AND reminderDay = " + getReminderDay() + " AND reminderMonth = " + getReminderMonth()
-                        + " AND reminderYear = " + getReminderYear() + "' AND reminderHour = " + getReminderHour() + " AND reminderMinute = " + getReminderMinute()
-                        + " AND reminderLocation = " + getLocation() + " AND reminderDescription = " + getDescription() + ";";
+                String sql = "DELETE FROM Reminder WHERE RemName = '" + row.getRemName() + "' AND RemDateTime = '" + row.getRemDateTime() + "' AND RemLocation = '" + row.getRemLocation() + "' AND RemDescription = '" + row.getRemDescription() + "';";
                 statement.execute(sql);
             }
 

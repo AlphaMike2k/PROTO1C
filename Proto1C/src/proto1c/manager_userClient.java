@@ -18,6 +18,8 @@ public class manager_userClient {
     private final gui_EventNew newEvent = new gui_EventNew(this);
     private final gui_Eventedit editEvent = new gui_Eventedit(this);
     private final gui_Reminders reminders = new gui_Reminders(this);
+    private final gui_RemindersMain mainReminders = new gui_RemindersMain(this);
+    
     private final gui_Budget budget = new gui_Budget(this);
     
     private final mediator mediatorParent;
@@ -71,9 +73,15 @@ public class manager_userClient {
         case "guiReminder":
             reminders.setVisible(true);
             currentGui = reminders;
+            break;
+        case "showReminders":
+            mainReminders.setVisible(true);
+            currentGui = mainReminders;
+            break;
         case "guiBudget":
             budget.setVisible(true);
             currentGui = budget;
+            break;
         default: 
             displayAlert("No GUI found");
         }
@@ -223,6 +231,22 @@ public class manager_userClient {
         mediatorParent.buttonPressed("calendarClicked", clickedDay,null);
     }
     
+    public void remindersPressed() {
+        mediatorParent.buttonPressed("showReminders", 0, null);
+    }
+    
+    public void showReminderList(ResultSet reminderSet) {
+        mainReminders.loadList(formatData(reminderSet,"RemName","RemDateTime","RemLocation","RemDescription"));
+    }
+    
+    public void reminderDelete(type_TableRow row) {
+        mediatorParent.buttonPressed("deleteReminder", 0, row);
+    }
+    
+    public void createReminder() {
+        mediatorParent.buttonPressed("remindersCreate", 0, null);
+    }
+    
     /**
      * Triggers the Reminder GUI for the reminder to be added.
      * @param row
@@ -344,6 +368,74 @@ public class manager_userClient {
         return null;
     }
     
+    /**
+     * 
+     * @param data
+     * @param colName
+     * @param colName2
+     * @param colName3
+     * @param colName4
+     * @return 
+     */
+    private ArrayList <type_TableRow> formatData(ResultSet data, String colName, String colName2, String colName3, String colName4) {
+        ArrayList <String> dsNamesList = new ArrayList<String>();
+        ArrayList <Timestamp> dsTimeList = new ArrayList<Timestamp>();
+        ArrayList <String> dsLocationList = new ArrayList<String>();
+        ArrayList <String> dsDescriptionList = new ArrayList<String>();
+        
+        ArrayList<type_TableRow> tableRows= new ArrayList<type_TableRow>();
+        
+        try{
+            while (data.next()) {
+                dsNamesList.add(data.getString(colName));
+                dsTimeList.add(data.getTimestamp(colName2));
+                dsLocationList.add(data.getString(colName3));
+                dsDescriptionList.add(data.getString(colName4));
+            }
+            
+            for (int i = 1; i < dsTimeList.size(); i++) {
+                int insertAt = i;
+                String curName = dsNamesList.get(i);
+                Timestamp curTime = dsTimeList.get(i);
+                String curLocation = dsLocationList.get(i);
+                String curDescription = dsDescriptionList.get(i);
+                
+                while (insertAt > 0 && dsTimeList.get(insertAt-1).after(curTime)) {
+                    dsNamesList.set(insertAt, dsNamesList.get(insertAt-1));
+                    dsTimeList.set(insertAt, dsTimeList.get(insertAt-1));
+                    dsLocationList.set(insertAt, dsLocationList.get(insertAt-1));
+                    dsDescriptionList.set(insertAt, dsDescriptionList.get(insertAt-1));
+                    
+                    insertAt --;
+                }
+                
+                dsNamesList.set(insertAt, curName);
+                dsTimeList.set(insertAt, curTime);
+                dsLocationList.set(insertAt, curLocation);
+                dsDescriptionList.set(insertAt, curDescription);
+                
+            }
+            
+            for (int j = 0; j < dsTimeList.size(); j++) {
+                tableRows.add(new type_TableRow(dsNamesList.get(j),dsLocationList.get(j),dsDescriptionList.get(j),dsTimeList.get(j)));
+            }
+            
+            return tableRows;
+        }
+        
+        catch(SQLException se){
+            se.printStackTrace();
+        } 
+        return null;
+    }
+     /**
+      * 
+      * @param data
+      * @param colName
+      * @param colName2
+      * @param colName3
+      * @return 
+      */
     private ArrayList <type_TableRow> formatEventData(ResultSet data, String colName, String colName2, String colName3) {
         ArrayList <String> dsNamesList = new ArrayList<String>();
         ArrayList <String> dsTypeList = new ArrayList<String>();

@@ -161,22 +161,22 @@ public class gui_RemindersMain extends javax.swing.JFrame {
         String value = reminderList.getModel().getValueAt(reminderList.getSelectedRow(), reminderList.getSelectedColumn()).toString();
         int row = reminderList.getSelectedRow();
         try {
-            if (value.equals("true")) {
+             if (value.equals("true")) {
                 if (prevRow >= 0) {
-                    reminderList.getModel().setValueAt(false, prevRow, 3);
-                }
-                selectedRow = new type_TableRow(reminderList.getModel().getValueAt(row, 0).toString(),reminderList.getModel().getValueAt(row, 1).toString(),Timestamp.valueOf(reminderList.getModel().getValueAt(row, 2).toString()));
+                    reminderList.getModel().setValueAt(false, prevRow, 4);
+                } 
+                selectedRow = new type_TableRow(reminderList.getModel().getValueAt(row, 0).toString(),reminderList.getModel().getValueAt(row, 2).toString(),reminderList.getModel().getValueAt(row, 3).toString(),Timestamp.valueOf(reminderList.getModel().getValueAt(row, 1).toString()));
                 prevRow = row;
             }
         }
-
+       
         catch (Exception e) {
             prevRow = -1;
         }
     }//GEN-LAST:event_reminderListMouseClicked
 
     private void reminderListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_reminderListPropertyChange
-
+        
     }//GEN-LAST:event_reminderListPropertyChange
 
     private void evt_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_backActionPerformed
@@ -191,12 +191,12 @@ public class gui_RemindersMain extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
-            userClientParent.eventDelete(selectedRow);
+            userClientParent.reminderDelete(selectedRow);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        userClientParent.createEvent();
+        userClientParent.createReminder();
     }//GEN-LAST:event_btnCreateActionPerformed
 
 

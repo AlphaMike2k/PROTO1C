@@ -392,7 +392,7 @@ public class gui_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     private void btnAddReminderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReminderActionPerformed
-        //userClientParent.remindersPressed();
+        userClientParent.remindersPressed();
     }//GEN-LAST:event_btnAddReminderActionPerformed
     
     /**
