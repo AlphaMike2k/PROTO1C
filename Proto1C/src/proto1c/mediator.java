@@ -122,6 +122,7 @@ public class mediator {
                  userClient.showReminderList(reminderManager.getReminders());
                 break;
             case "updateBudget":
+                userClient.changeInterface("guiBudget");
                 budgetManager.updateBudget(newRow);
                 break;
             case "showReminders":
