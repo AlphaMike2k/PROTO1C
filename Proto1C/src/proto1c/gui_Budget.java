@@ -2,7 +2,7 @@ package proto1c;
 import java.text.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.JOptionPane;
 /**
  **Class that creates the GUI for the Budget.
  **@author UP875166
@@ -52,6 +52,11 @@ private final manager_userClient userClient;
         budgetText.setText("Monthly Budget (£) :");
 
         budget.setText("0.00");
+        budget.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                budgetMouseClicked(evt);
+            }
+        });
         budget.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 budgetActionPerformed(evt);
@@ -148,24 +153,34 @@ private final manager_userClient userClient;
     }//GEN-LAST:event_budgetActionPerformed
 
     private void updateBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBudgetActionPerformed
-        NumberFormat formatter = new DecimalFormat("#0.00");   
-        userBudget.setText("");
-        float f = Float.parseFloat(budget.getText());
-        double weeklyBudget = f/4;
+        String errorMessage = "";
+        try{
+            NumberFormat formatter = new DecimalFormat("#0.00");
+            userBudget.setText("");
+            float f = Float.parseFloat(budget.getText());
+            double weeklyBudget = f/4;
 
-        f = Float.parseFloat(budget.getText());
-        float yearlyBudget = (int) (f * 12);
-        float dailyBudget = yearlyBudget/365;
+            f = Float.parseFloat(budget.getText());
+            float yearlyBudget = (int) (f * 12);
+            float dailyBudget = yearlyBudget/365;
 
-        userBudget.setText(userBudget.getText() + "Monthly Budget:" + formatter.format(f));
-        userBudget.setText(userBudget.getText() + "\nWeekly Budget: " + formatter.format(weeklyBudget));
-        userBudget.setText(userBudget.getText() + "\nDaily Budget: " + formatter.format(dailyBudget));
+            userBudget.setText(userBudget.getText() + "Monthly Budget:" + formatter.format(f));
+            userBudget.setText(userBudget.getText() + "\nWeekly Budget: " + formatter.format(weeklyBudget));
+            userBudget.setText(userBudget.getText() + "\nDaily Budget: " + formatter.format(dailyBudget));
+        }catch (NumberFormatException e){
+            errorMessage = errorMessage.concat("Please enter a number! Not letters.");
+            JOptionPane.showMessageDialog(null, errorMessage,"Invalid Field", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_updateBudgetActionPerformed
 
     private void clearBudget1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBudget1ActionPerformed
         budget.setText("0.00");
         userBudget.setText("");
     }//GEN-LAST:event_clearBudget1ActionPerformed
+
+    private void budgetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_budgetMouseClicked
+        budget.setText("");
+    }//GEN-LAST:event_budgetMouseClicked
 
     
     

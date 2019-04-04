@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-
+import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
 /**
  **Class that creates the GUI for the Reminders.
  **@author UP875166
@@ -60,6 +60,7 @@ public class gui_Reminders extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Time", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14))); // NOI18N
         jPanel3.setToolTipText("");
 
+        hour.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
         hour.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 hourStateChanged(evt);
@@ -70,6 +71,7 @@ public class gui_Reminders extends javax.swing.JFrame {
 
         jLabel5.setText("mm");
 
+        minute.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
         minute.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 minuteStateChanged(evt);
@@ -105,14 +107,22 @@ public class gui_Reminders extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Date", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14))); // NOI18N
         jPanel4.setToolTipText("Date");
 
+        day.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
         day.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 dayStateChanged(evt);
             }
         });
+        day.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dayMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("DD");
 
+        month.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        month.setToolTipText("");
         month.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 monthStateChanged(evt);
@@ -123,6 +133,7 @@ public class gui_Reminders extends javax.swing.JFrame {
 
         jLabel3.setText("YYYY");
 
+        year.setModel(new javax.swing.SpinnerNumberModel(2019, 2019, 2024, 1));
         year.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 yearStateChanged(evt);
@@ -343,6 +354,7 @@ public class gui_Reminders extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    final int reqFields = 8;
     int validFields = 0;
     String errorMessage = "";
         
@@ -461,19 +473,35 @@ public class gui_Reminders extends javax.swing.JFrame {
             }
         }
         
-          if (validFields == 8) {
-            LocalDate ld = LocalDate.of(Integer.valueOf(year.getValue().toString()), Integer.valueOf(month.getValue().toString()), Integer.valueOf(day.getValue().toString()));
-            LocalTime lt = LocalTime.of(Integer.valueOf(hour.getValue().toString()), Integer.valueOf(minute.getValue().toString()));
+
+        //Ensure the fields are valid to avoid error message.
+        if (validFields < reqFields){
+            JOptionPane.showMessageDialog(null, errorMessage,"Invalid Fields", JOptionPane.ERROR_MESSAGE);
+        }else{
+          JOptionPane.showMessageDialog(null, "Reminder has been added.", "Reminder Created", JOptionPane.INFORMATION_MESSAGE);
+          int remDate = (remDay + remMonth + remYear);
+          int remTime = (remHour + remMinute);        
+          SimpleDateFormat df = new SimpleDateFormat("DD/MM/YYYY");
+          SimpleDateFormat tf = new SimpleDateFormat("kk:mm");
+          String date = df.format(remDate);
+          String time = tf.format(Integer.valueOf(remTime));
           
-            Timestamp ts = Timestamp.valueOf(LocalDateTime.of(ld, lt));
-            userClientParent.remindersAdd(new type_TableRow(nameText.getText(),locationText.getText(),descriptionText.getText(),ts));
-          }
+          LocalDate ld = LocalDate.of(remYear, remMonth, remDay);
+          LocalTime lt = LocalTime.of(remHour, remMinute);
+          
+          Timestamp ts = Timestamp.valueOf(LocalDateTime.of(ld, lt));
+          userClientParent.remindersAdd(new type_TableRow(nameText.getText(),locationText.getText(),descriptionText.getText(),ts));
+        }
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         //closes the window and goes back
         userClientParent.back();
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void dayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dayMouseClicked
+
+    }//GEN-LAST:event_dayMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -504,4 +532,12 @@ public class gui_Reminders extends javax.swing.JFrame {
     private javax.swing.JSpinner year;
     // End of variables declaration//GEN-END:variables
 
+    private String remName;
+    private int remDay;
+    private int remMonth;
+    private int remYear;
+    private int remHour;
+    private int remMinute;
+    private int remLocation;
+    private int remDescription;
 }
