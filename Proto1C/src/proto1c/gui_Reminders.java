@@ -292,49 +292,49 @@ public class gui_Reminders extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dayStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dayStateChanged
-
-        int num = (int) day.getValue();
-        if (num<1){
-            day.setValue(1);
-        } else if (num > 31) { 
-            day.setValue(1);
-        }
+//
+//        int num = (int) day.getValue();
+//        if (num<1){
+//            day.setValue(1);
+//        } else if (num > 31) { 
+//            day.setValue(1);
+//        }
     }//GEN-LAST:event_dayStateChanged
 
     private void monthStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_monthStateChanged
-      int num = (int) month.getValue();
-        if (num<1){
-            month.setValue(1);
-        } else if (num > 12) { 
-            month.setValue(1);
-        }
+//      int num = (int) month.getValue();
+//        if (num<1){
+//            month.setValue(1);
+//        } else if (num > 12) { 
+//            month.setValue(1);
+//        }
     }//GEN-LAST:event_monthStateChanged
 
     private void yearStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_yearStateChanged
-    int num = (int) year.getValue();
-            if (num<2019){
-                year.setValue(2019);
-            } else if (num > 2021) { 
-                year.setValue(2019);
-            }
+//    int num = (int) year.getValue();
+//            if (num<2019){
+//                year.setValue(2019);
+//            } else if (num > 2021) { 
+//                year.setValue(2019);
+//            }
     }//GEN-LAST:event_yearStateChanged
 
     private void hourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_hourStateChanged
-        int num = (int) hour.getValue();
-        if (num<00){
-            hour.setValue(00);
-        } else if (num > 23) { 
-            hour.setValue(00);
-        }
+//        int num = (int) hour.getValue();
+//        if (num<00){
+//            hour.setValue(00);
+//        } else if (num > 23) { 
+//            hour.setValue(00);
+//        }
     }//GEN-LAST:event_hourStateChanged
 
     private void minuteStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_minuteStateChanged
-        int num = (int) minute.getValue();
-        if (num<00){
-            minute.setValue(00);
-        } else if (num > 59) { 
-            minute.setValue(00);
-        }
+//        int num = (int) minute.getValue();
+//        if (num<00){
+//            minute.setValue(00);
+//        } else if (num > 59) { 
+//            minute.setValue(00);
+//        }
     }//GEN-LAST:event_minuteStateChanged
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
