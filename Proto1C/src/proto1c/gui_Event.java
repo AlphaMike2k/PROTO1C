@@ -118,6 +118,7 @@ public class gui_Event extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Events");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Events");
@@ -237,6 +238,7 @@ public class gui_Event extends javax.swing.JFrame {
      * @param evt The click event
      */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        //Edits the selected row from the list
         userClientParent.editEvent(selectedRow);
     }//GEN-LAST:event_btnEditActionPerformed
     
@@ -245,6 +247,7 @@ public class gui_Event extends javax.swing.JFrame {
      * @param evt The click event 
     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        //Confirms the deletion of the selected row from the list
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
             userClientParent.eventDelete(selectedRow);

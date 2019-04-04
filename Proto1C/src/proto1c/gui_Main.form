@@ -269,7 +269,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnDeleteTask" alignment="0" pref="125" max="32767" attributes="0"/>
+                      <Component id="btnDeleteTask" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnEditReminder" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnEditTask" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnAddTask" alignment="1" max="32767" attributes="0"/>
@@ -395,6 +395,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Budget"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBudgetActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnBudgetList">
           <Properties>
