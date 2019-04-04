@@ -13,7 +13,7 @@ public class gui_BudgetList extends javax.swing.JFrame {
     
     /**
      * Creates new form gui_BudgetList
-     * @param userClient
+     * @param userClient The parent that creates this GUI
      */
     public gui_BudgetList(manager_userClient userClient) {
         userClientParent = userClient;
@@ -22,8 +22,8 @@ public class gui_BudgetList extends javax.swing.JFrame {
     }
     
     /**
-     * 
-     * @param budgetList 
+     * Fills the Jtable with values
+     * @param budgetList The sorted list of values from the database
      */
     public void loadList(ArrayList <type_TableRow> budgetList) {
         userBudgetList.setRowHeight(40);
@@ -252,16 +252,17 @@ public class gui_BudgetList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * 
-     * @param evt 
+     * Triggers event when back button pressed
+     * @param evt The click event
      */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         userClientParent.back();
     }//GEN-LAST:event_btnBackActionPerformed
     
     /**
-     * 
-     * @param evt 
+     * Triggers an event when add button pressed.
+     * Validates/checks inputs before sending table row
+     * @param evt The click event
      */
     private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemActionPerformed
         String itemName = txtItemName.getText();
@@ -290,11 +291,13 @@ public class gui_BudgetList extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddItemActionPerformed
 
-    
-    
     private void userBudgetListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_userBudgetListPropertyChange
     }//GEN-LAST:event_userBudgetListPropertyChange
-
+    
+    /**
+     * Triggers an event when tickbox is checked to remove item from database
+     * @param evt The click event
+     */
     private void userBudgetListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBudgetListMouseClicked
         String value = userBudgetList.getModel().getValueAt(userBudgetList.getSelectedRow(), userBudgetList.getSelectedColumn()).toString();
         int row = userBudgetList.getSelectedRow();
@@ -305,13 +308,17 @@ public class gui_BudgetList extends javax.swing.JFrame {
             userClientParent.spendingListCheck(new type_TableRow(userBudgetList.getModel().getValueAt(row, 1).toString(), cost, Integer.valueOf(userBudgetList.getModel().getValueAt(row, 0).toString())));
         }
     }//GEN-LAST:event_userBudgetListMouseClicked
-
+    
+    /**
+     * Triggers event when edit budget pressed to display edit budget GUI
+     * @param evt 
+     */
     private void btnEditBudgetListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditBudgetListActionPerformed
         userClientParent.editSpendingList();
     }//GEN-LAST:event_btnEditBudgetListActionPerformed
      
     /**
-     * 
+     * Sets input box values to blank
      */
     public void clearBoxes() {
         txtItemName.setText("");

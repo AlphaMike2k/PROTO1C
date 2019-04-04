@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
 import static proto1c.Proto1C.conn;
@@ -186,6 +185,7 @@ public class manager_Reminder {
         }
     
     public void updateReminder(type_TableRow row){
+        /*
         try {
                 Statement statement = null;
                 statement = dbConnection.createStatement();
@@ -199,5 +199,6 @@ public class manager_Reminder {
         catch(SQLException se){
                 se.printStackTrace();
             }
+    */
     }
 }

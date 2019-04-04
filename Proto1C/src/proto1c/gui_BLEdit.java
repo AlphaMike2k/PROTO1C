@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Interface the user interacts with to edit the budget list
  * @author UP820734
  */
 public class gui_BLEdit extends javax.swing.JFrame {
@@ -14,7 +14,8 @@ public class gui_BLEdit extends javax.swing.JFrame {
     private int prevRow = -1; 
     
     /**
-     * Creates new form gui_BLEdit
+     * Creates new form gui_BLEditthe GUI
+     * @param userClient The parent that creates this GUI
      */
     public gui_BLEdit(manager_userClient userClient) {
         userClientParent = userClient;
@@ -241,8 +242,9 @@ public class gui_BLEdit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * 
-     * @param evt 
+     * Triggers an event when calendar is clicked.
+     * If tickbox column is true, gets values of selected rows
+     * @param evt The click event
      */
     private void userBudgetListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userBudgetListMouseClicked
         String value = userBudgetList.getModel().getValueAt(userBudgetList.getSelectedRow(), userBudgetList.getSelectedColumn()).toString();
@@ -264,6 +266,10 @@ public class gui_BLEdit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_userBudgetListMouseClicked
     
+    /**
+     * Fills the Jtable with values
+     * @param budgetList The sorted list of values from the database
+     */
     public void loadList(ArrayList <type_TableRow> budgetList) {
         userBudgetList.setRowHeight(40);
         DefaultTableModel model = (DefaultTableModel) userBudgetList.getModel();
@@ -280,11 +286,21 @@ public class gui_BLEdit extends javax.swing.JFrame {
     private void userBudgetListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_userBudgetListPropertyChange
 
     }//GEN-LAST:event_userBudgetListPropertyChange
-
+    
+    /**
+     * Triggers event when back button pressed
+     * @param evt The click event
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         userClientParent.back();
     }//GEN-LAST:event_btnBackActionPerformed
-
+    
+    /**
+     * Triggers event when save button pressed.
+     * Validates users input.
+     * Creates a table row object of values.
+     * @param evt The click event
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         int row = userBudgetList.getSelectedRow();
         
@@ -317,7 +333,11 @@ public class gui_BLEdit extends javax.swing.JFrame {
             clearBoxes();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
-
+    
+    /**
+     * Clears user input boxes and sets tickbox to false
+     * @param evt The click event
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         int row = userBudgetList.getSelectedRow();
         
@@ -327,11 +347,20 @@ public class gui_BLEdit extends javax.swing.JFrame {
         
         clearBoxes();
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    
+    /**
+     * Triggers event to display the spending list
+     * @param evt The click event
+     */
     private void btnEditBudgetListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditBudgetListActionPerformed
         userClientParent.spendingList();
     }//GEN-LAST:event_btnEditBudgetListActionPerformed
-
+    
+    /**
+     * Triggers event to remove selected item from database.
+     * Converts/checks values before creating table row object
+     * @param evt The click event
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             String value = userBudgetList.getModel().getValueAt(userBudgetList.getSelectedRow(), userBudgetList.getSelectedColumn()).toString();
@@ -348,7 +377,10 @@ public class gui_BLEdit extends javax.swing.JFrame {
             userClientParent.displayAlert("Please select a value");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+    
+    /**
+     * Sets the input boxes to blank
+     */
     public void clearBoxes() {
         txtItemName.setText("");
         txtPrice.setText("");

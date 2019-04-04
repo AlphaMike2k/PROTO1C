@@ -296,21 +296,21 @@
                       <Component id="btnAddEvent" min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnEditTask" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnEditTask" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="btnAddReminder" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btnDeleteTask" min="-2" pref="43" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnAddReminder" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="btnEditReminder" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnEditReminder" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnDeleteReminder" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnImportLectures" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnBudget" pref="46" max="32767" attributes="0"/>
+                      <Component id="btnBudget" pref="47" max="32767" attributes="0"/>
                       <Component id="btnBudgetList" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -328,8 +328,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAddReminder">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add Reminder"/>
+            <Property name="text" type="java.lang.String" value="Reminders"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddReminderActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAddTask">
           <Properties>

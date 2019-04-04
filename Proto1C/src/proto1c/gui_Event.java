@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Interface the user interacts with to add/edit/delete events
  * @author Michael
  */
 public class gui_Event extends javax.swing.JFrame {
@@ -21,14 +21,18 @@ public class gui_Event extends javax.swing.JFrame {
 
     /**
      * Creates new form gui_Event
-     * @param userClient
+     * @param userClient The parent that creates this GUI
      */
     public gui_Event(manager_userClient userClient) {
         userClientParent = userClient;
         initComponents();
     }
     
-       public void loadList(ArrayList <type_TableRow> allEvents) {
+    /**
+     * Fills the Jtable with values
+     * @param allEvents The sorted list of values from the database
+     */
+    public void loadList(ArrayList <type_TableRow> allEvents) {
         eventList.setRowHeight(40);
         DefaultTableModel model = (DefaultTableModel) eventList.getModel();
             
@@ -227,18 +231,30 @@ public class gui_Event extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Triggers event to display the edit GUI
+     * @param evt The click event
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         userClientParent.editEvent(selectedRow);
     }//GEN-LAST:event_btnEditActionPerformed
-   
+    
+    /**
+     * Triggers event when to delete selected item when pressed
+     * @param evt The click event 
+    */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this event?\n" + "This action cannot be undone.", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
         if(confirm == JOptionPane.YES_OPTION){
             userClientParent.eventDelete(selectedRow);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+    
+    /**
+     * Triggers event when back button pressed
+     * @param evt The click event
+     */
     private void evt_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_backActionPerformed
         // Once clicked, it will take the user back to the main screen to access other features
         userClientParent.back();
