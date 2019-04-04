@@ -134,6 +134,11 @@ public class gui_EventNew extends javax.swing.JFrame {
                 evt_typeMouseClicked(evt);
             }
         });
+        evt_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evt_typeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,15 +215,23 @@ public class gui_EventNew extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void evt_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_createActionPerformed
-        final int reqFields = 6;
+        final int reqFields = 7;
         int validFields = 0;
         String errorMessage = "";
         
-        //Validation to ensure entered fields are correct.
+        //Validation to ensure name field is not empty and does not contain its placeholder.
         if(evt_name.getText().equalsIgnoreCase("Name")||evt_name.getText().isEmpty()){
             errorMessage = errorMessage.concat("Name field is missing.\n");
         }else{
-            String aName = evt_name.getText();
+            aName = evt_name.getText();
+            validFields++;
+        }
+        
+        //Validation to ensure type field is not empty and does not contain its placeholder.
+        if(evt_type.getText().equalsIgnoreCase("Type")||evt_type.getText().isEmpty()){
+            errorMessage = errorMessage.concat("Type field is missing.\n");
+        }else{
+            aType = evt_name.getText();
             validFields++;
         }
         
@@ -316,10 +329,6 @@ public class gui_EventNew extends javax.swing.JFrame {
         if (validFields < reqFields){
             JOptionPane.showMessageDialog(null, errorMessage,"Invalid Fields", JOptionPane.ERROR_MESSAGE);
         }else{
-        
-       // System.out.println(aName);
-        //System.out.println(aDate);
-        //System.out.println(aTime);
           JOptionPane.showMessageDialog(null, "Event has been created.", "Event Created", JOptionPane.INFORMATION_MESSAGE);
           aDate = (aDay + aMonth + aYear);
           aTime = (aHour + aMinute);        
@@ -377,6 +386,10 @@ public class gui_EventNew extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_evt_typeMouseClicked
 
+    private void evt_typeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evt_typeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_evt_typeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton evt_cancel;
@@ -401,6 +414,7 @@ public class gui_EventNew extends javax.swing.JFrame {
 
 
     private String aName;
+    private String aType;
     private int aDay;
     private int aMonth;
     private int aYear;
