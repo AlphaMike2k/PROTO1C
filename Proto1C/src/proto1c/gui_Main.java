@@ -214,6 +214,11 @@ public class gui_Main extends javax.swing.JFrame {
         });
 
         btnAddReminder.setText("Add Reminder");
+        btnAddReminder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddReminderActionPerformed(evt);
+            }
+        });
 
         btnAddTask.setText("Add Task");
         btnAddTask.setMaximumSize(new java.awt.Dimension(123, 25));
@@ -241,6 +246,11 @@ public class gui_Main extends javax.swing.JFrame {
         btnDeleteReminder.setText("Delete Reminder");
 
         btnBudget.setText("Budget");
+        btnBudget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBudgetActionPerformed(evt);
+            }
+        });
 
         btnBudgetList.setText("Spending List");
         btnBudgetList.addActionListener(new java.awt.event.ActionListener() {
@@ -256,10 +266,10 @@ public class gui_Main extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAddEvent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddReminder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+                    .addComponent(btnAddReminder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, Short.MAX_VALUE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDeleteTask, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(btnDeleteTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditReminder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditTask, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAddTask, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -385,6 +395,14 @@ public class gui_Main extends javax.swing.JFrame {
         // Clicking this button opens the Event GUI, enabling you to access features from there.
         userClientParent.viewEvents();
     }//GEN-LAST:event_btnAddEventActionPerformed
+
+    private void btnAddReminderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReminderActionPerformed
+        userClientParent.remindersAdd();
+    }//GEN-LAST:event_btnAddReminderActionPerformed
+
+    private void btnBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBudgetActionPerformed
+        userClientParent.updateBudget();
+    }//GEN-LAST:event_btnBudgetActionPerformed
     
     /**
      * Specifies calender properties
