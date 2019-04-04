@@ -56,6 +56,7 @@ public class gui_Eventedit extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Edit Event");
 
         editsave.setText("Save");
         editsave.addActionListener(new java.awt.event.ActionListener() {

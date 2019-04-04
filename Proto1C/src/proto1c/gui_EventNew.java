@@ -55,6 +55,7 @@ public class gui_EventNew extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("New Event");
 
         evt_create.setText("Create");
         evt_create.addActionListener(new java.awt.event.ActionListener() {
