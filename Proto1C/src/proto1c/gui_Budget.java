@@ -31,9 +31,10 @@ private final manager_userClient userClient;
         budgetPanel = new javax.swing.JPanel();
         budgetText = new javax.swing.JLabel();
         budget = new javax.swing.JTextField();
-        clearBudget = new javax.swing.JButton();
+        updateBudget = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         userBudget = new javax.swing.JTextArea();
+        clearBudget1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,11 +79,11 @@ private final manager_userClient userClient;
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        clearBudget.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        clearBudget.setText("Clear");
-        clearBudget.addActionListener(new java.awt.event.ActionListener() {
+        updateBudget.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        updateBudget.setText("Update Budget");
+        updateBudget.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBudgetActionPerformed(evt);
+                updateBudgetActionPerformed(evt);
             }
         });
 
@@ -94,6 +95,14 @@ private final manager_userClient userClient;
         userBudget.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(userBudget);
 
+        clearBudget1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        clearBudget1.setText("Clear");
+        clearBudget1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBudget1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,11 +111,14 @@ private final manager_userClient userClient;
                 .addComponent(jButton2)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(budgetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clearBudget)
-                    .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(updateBudget)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(budgetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clearBudget1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,11 +127,13 @@ private final manager_userClient userClient;
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(budgetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(clearBudget)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(updateBudget)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clearBudget1)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -133,48 +147,36 @@ private final manager_userClient userClient;
     float f = Float.parseFloat(budget.getText());
     }//GEN-LAST:event_budgetActionPerformed
 
-    private void clearBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBudgetActionPerformed
-        budget.setText("£0.00");
-    }//GEN-LAST:event_clearBudgetActionPerformed
+    private void updateBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBudgetActionPerformed
+        NumberFormat formatter = new DecimalFormat("#0.00");   
+        userBudget.setText("");
+        float f = Float.parseFloat(budget.getText());
+        double weeklyBudget = f/4;
 
-    /**
-     * Method that returns the weekly budget.
-     @return Returns weeklyBudget.
-     */
-    public double getWeeklyBudget(double weeklyBudget){
-        float f = Float.parseFloat(budget.getText());
-        return weeklyBudget = f/4;
-    }
-    
-    /**
-         * Method that calculates the yearly and daily budget and returns the daily one.
-         @return Returns dailyBudget.
-         */
-    public double getDailyBudget(double dailyBudget){
-        float f = Float.parseFloat(budget.getText());
-        int yearlyBudget = (int) (f * 12);
-        return dailyBudget = yearlyBudget/365;
-    }
-    
-        /**
-         * Method that shows the daily, weekly and monthly budget.
-         *@param weeklyBudget
-         *@param dailyBudget 
-         */
-    public void showBudget(double weeklyBudget, double dailyBudget){
-        userBudget.setText(userBudget.getText() + "Monthly Budget:" + budget);
-        userBudget.setText(userBudget.getText() + "\nWeekly Budget: " + weeklyBudget);
-        userBudget.setText(userBudget.getText() + "\nDaily Budget: " + dailyBudget);
-    }
+        f = Float.parseFloat(budget.getText());
+        float yearlyBudget = (int) (f * 12);
+        float dailyBudget = yearlyBudget/365;
+
+        userBudget.setText(userBudget.getText() + "Monthly Budget:" + formatter.format(f));
+        userBudget.setText(userBudget.getText() + "\nWeekly Budget: " + formatter.format(weeklyBudget));
+        userBudget.setText(userBudget.getText() + "\nDaily Budget: " + formatter.format(dailyBudget));
+    }//GEN-LAST:event_updateBudgetActionPerformed
+
+    private void clearBudget1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBudget1ActionPerformed
+        budget.setText("0.00");
+        userBudget.setText("");
+    }//GEN-LAST:event_clearBudget1ActionPerformed
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField budget;
     private javax.swing.JPanel budgetPanel;
     private javax.swing.JLabel budgetText;
-    private javax.swing.JButton clearBudget;
+    private javax.swing.JButton clearBudget1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton updateBudget;
     private javax.swing.JTextArea userBudget;
     // End of variables declaration//GEN-END:variables
 
