@@ -1,25 +1,23 @@
 package proto1c;
-import java.text.*;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-import java.text.SimpleDateFormat;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.LocalTime;
+
 
 /**
  **Class that creates the GUI for the Reminders.
  **@author UP875166
  */
 public class gui_Reminders extends javax.swing.JFrame {
-    private final manager_userClient userClient;
+    private final manager_userClient userClientParent;
     /**
      * Creates new form gui_Reminders
      */
-    public gui_Reminders(manager_userClient userClientParent) {
+    public gui_Reminders(manager_userClient userClient) {
         initComponents();
-        userClient = userClientParent;
+        userClientParent = userClient;
     }
 
     /**
@@ -341,7 +339,7 @@ public class gui_Reminders extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         //goes back to the main gui
-        userClient.back();
+        userClientParent.back();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -463,22 +461,18 @@ public class gui_Reminders extends javax.swing.JFrame {
             }
         }
         
+          if (validFields == 8) {
+            LocalDate ld = LocalDate.of(Integer.valueOf(year.getValue().toString()), Integer.valueOf(month.getValue().toString()), Integer.valueOf(day.getValue().toString()));
+            LocalTime lt = LocalTime.of(Integer.valueOf(hour.getValue().toString()), Integer.valueOf(minute.getValue().toString()));
           
-        
-//        String remName = nameText.getText();
-//        String remLocation = locationText.getText();
-//        String remDescription = descriptionText.getText();
-//        int remDay = Integer.valueOf(day.getValue().toString());
-//        int remMonth = Integer.valueOf(month.getValue().toString());
-//        int remYear = Integer.valueOf(year.getValue().toString());
-//        int remHour = Integer.valueOf(hour.getValue().toString());
-//        int remMinute = Integer.valueOf(minute.getValue().toString());
-//        userClient.remindersAdd(new type_TableRow(remName, remDay, remMonth, remYear, remHour, remMinute, remLocation, remDescription));
+            Timestamp ts = Timestamp.valueOf(LocalDateTime.of(ld, lt));
+            userClientParent.remindersAdd(new type_TableRow(nameText.getText(),locationText.getText(),descriptionText.getText(),ts));
+          }
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         //closes the window and goes back
-        userClient.back();
+        userClientParent.back();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 
@@ -510,12 +504,4 @@ public class gui_Reminders extends javax.swing.JFrame {
     private javax.swing.JSpinner year;
     // End of variables declaration//GEN-END:variables
 
-    private String remName;
-    private String remLocation;
-    private String remDescription;
-    private int remDay;
-    private int remMonth;
-    private int remYear;
-    private int remHour;
-    private int remMinute;
 }

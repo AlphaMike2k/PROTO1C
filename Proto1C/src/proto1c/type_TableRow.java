@@ -22,15 +22,11 @@ public class type_TableRow {
     private String oldEventType = null;
     private String oldEventName = null;
 
-    private String tblType = null;
     private String remName = null;
-    private int remDay = 1;
-    private int remMonth = 1;
-    private int remYear = 2019;
-    private int remHour = 00;
-    private int remMinute = 00;
     private String remLocation = null;
     private String remDescription = null;
+    private Timestamp remDateTime = null;
+    
     private double newBudget = 0.00;
     
     public type_TableRow() {
@@ -54,13 +50,9 @@ public class type_TableRow {
     }
    
     
-    public type_TableRow(String name, int day, int month, int year, int hour, int minute, String location, String description){
+    public type_TableRow(String name, String location, String description, Timestamp dateTime){
         remName = name;
-        remDay = day;
-        remMonth = month;
-        remYear = year;
-        remHour = hour;
-        remMinute = minute;
+        remDateTime = dateTime;
         remLocation = location;
         remDescription = description;
     }
@@ -157,24 +149,8 @@ public class type_TableRow {
         return remName;
     }
 
-    public int getRemDay() {
-        return remDay;
-    }
-
-    public int getRemMonth() {
-        return remMonth;
-    }
-
-    public int getRemYear() {
-        return remYear;
-    }
-
-    public int getRemHour() {
-        return remHour;
-    }
-
-    public int getRemMinute() {
-        return remMinute;
+    public Timestamp getRemDateTime() {
+        return remDateTime;
     }
 
     public String getRemLocation() {

@@ -117,11 +117,23 @@ public class mediator {
                 userClient.changeInterface("guiMainEventScreen");
                 break;
             case "remindersAdd":
-                reminderManager.insertNewReminder();
-                userClient.displayReminders(dateToSend, reminderManager.getReminders());
+                reminderManager.insertNewReminder(newRow);
+                userClient.changeInterface("showReminders");
+                 userClient.showReminderList(reminderManager.getReminders());
                 break;
             case "updateBudget":
                 budgetManager.updateBudget(newRow);
+                break;
+            case "showReminders":
+                userClient.changeInterface(button);
+                userClient.showReminderList(reminderManager.getReminders());
+                break;
+            case "deleteReminder":
+                reminderManager.removeReminder(newRow);
+                userClient.showReminderList(reminderManager.getReminders());
+                break;
+            case "remindersCreate":
+                userClient.changeInterface("guiReminder");
                 break;
             default:
                 userClient.displayAlert("Unknown button");
