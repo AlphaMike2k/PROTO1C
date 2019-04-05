@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
 import java.time.*;
+import javax.swing.JTextField;
 
 /**
  *
@@ -216,6 +217,10 @@ public class gui_Eventedit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Fills GUI text boxes with sent data
+     * @param eventToDisplay The selected event to edit
+     */
     public void loadEvent(type_TableRow eventToDisplay) {
         displayedEvent = eventToDisplay;
         LocalDateTime dt = eventToDisplay.getEventDateTime().toLocalDateTime();
@@ -437,5 +442,35 @@ public class gui_Eventedit extends javax.swing.JFrame {
     private int aMinute;
     private int aTime;
     private int aDate;
+
+    public String getEdit_day() {
+        return edit_day.getText();
+    }
+
+    public String getEdit_hour() {
+        return edit_hour.getText();
+    }
+
+    public String getEdit_min() {
+        return edit_min.getText();
+    }
+
+    public String getEdit_month() {
+        return edit_month.getText();
+    }
+
+    public String getEdit_name() {
+        return edit_name.getText();
+    }
+
+    public String getEdit_type() {
+        return edit_type.getText();
+    }
+
+    public String getEdit_year() {
+        return edit_year.getText();
+    }
+    
+    
    
 }
