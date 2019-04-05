@@ -2,6 +2,8 @@ package proto1c;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -404,4 +406,57 @@ public class gui_BLEdit extends javax.swing.JFrame {
     private javax.swing.JTextField txtPriority;
     private javax.swing.JTable userBudgetList;
     // End of variables declaration//GEN-END:variables
+    
+    
+    /**
+     * For Testing purposes
+     */
+    public String getTxtItemName() {
+        return txtItemName.getText();
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public String getTxtPrice() {
+        return txtPrice.getText();
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public String getTxtPriority() {
+        return txtPriority.getText();
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public JTable getUserBudgetList() {
+        return userBudgetList;
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public void setTxtItemName(String txtItemName) {
+        this.txtItemName.setText(txtItemName);
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public void setTxtPrice(String txtPrice) {
+        this.txtPrice.setText(txtPrice);
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public void setTxtPriority(String txtPriority) {
+        this.txtPriority.setText(txtPriority);
+    }
+    
+    
+    
 }

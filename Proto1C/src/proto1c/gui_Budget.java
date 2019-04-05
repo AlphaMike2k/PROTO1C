@@ -1,7 +1,5 @@
 package proto1c;
 import java.text.*;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 /**
  **Class that creates the GUI for the Budget.
@@ -11,6 +9,7 @@ public class gui_Budget extends javax.swing.JFrame {
 private final manager_userClient userClient;
     /**
      * Creates new form gui_Budget
+     * @param userClientParent The parent that creates GUI
      */
     public gui_Budget(manager_userClient userClientParent) {
         initComponents();
@@ -143,11 +142,15 @@ private final manager_userClient userClient;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     
+    /**
+     * Returns user to main GUI screen
+     * @param evt Click event
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         userClient.back();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void budgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_budgetActionPerformed
     float f = Float.parseFloat(budget.getText());
     }//GEN-LAST:event_budgetActionPerformed

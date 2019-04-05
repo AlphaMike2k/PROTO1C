@@ -1,6 +1,7 @@
 package proto1c;
 import java.text.*;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -9,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class gui_BudgetList extends javax.swing.JFrame {
     private final manager_userClient userClientParent;
-    private DecimalFormat decFormat = new DecimalFormat("#.00");
+    private final DecimalFormat decFormat = new DecimalFormat("#.00");
     
     /**
      * Creates new form gui_BudgetList
@@ -183,11 +184,6 @@ public class gui_BudgetList extends javax.swing.JFrame {
                 userBudgetListMouseClicked(evt);
             }
         });
-        userBudgetList.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                userBudgetListPropertyChange(evt);
-            }
-        });
         jScrollPane1.setViewportView(userBudgetList);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -290,9 +286,6 @@ public class gui_BudgetList extends javax.swing.JFrame {
             clearBoxes();
         }
     }//GEN-LAST:event_btnAddItemActionPerformed
-
-    private void userBudgetListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_userBudgetListPropertyChange
-    }//GEN-LAST:event_userBudgetListPropertyChange
     
     /**
      * Triggers an event when tickbox is checked to remove item from database
@@ -342,4 +335,53 @@ public class gui_BudgetList extends javax.swing.JFrame {
     private javax.swing.JTextField txtPriority;
     private javax.swing.JTable userBudgetList;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * For Testing purposes
+     */
+    public String getTxtItemName() {
+        return txtItemName.getText();
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public String getTxtPrice() {
+        return txtPrice.getText();
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public String getTxtPriority() {
+        return txtPriority.getText();
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public JTable getUserBudgetList() {
+        return userBudgetList;
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public void setTxtItemName(String txtItemName) {
+        this.txtItemName.setText(txtItemName);
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public void setTxtPrice(String txtPrice) {
+        this.txtPrice.setText(txtPrice);
+    }
+    
+    /**
+     * For Testing purposes
+     */
+    public void setTxtPriority(String txtPriority) {
+        this.txtPriority.setText(txtPriority);
+    }
 }

@@ -8,6 +8,7 @@ package proto1c;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -180,11 +181,6 @@ public class gui_Event extends javax.swing.JFrame {
                 eventListMouseClicked(evt);
             }
         });
-        eventList.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                eventListPropertyChange(evt);
-            }
-        });
         jScrollPane1.setViewportView(eventList);
         if (eventList.getColumnModel().getColumnCount() > 0) {
             eventList.getColumnModel().getColumn(0).setResizable(false);
@@ -262,11 +258,19 @@ public class gui_Event extends javax.swing.JFrame {
         // Once clicked, it will take the user back to the main screen to access other features
         userClientParent.back();
     }//GEN-LAST:event_evt_backActionPerformed
-
+    
+    /**
+     * Triggers event when create button pressed
+     * @param evt The click event
+     */
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         userClientParent.createEvent();
     }//GEN-LAST:event_btnCreateActionPerformed
-
+    
+    /**
+     * Triggers event when user ticks checkbox
+     * @param evt 
+     */
     private void eventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventListMouseClicked
         String value = eventList.getModel().getValueAt(eventList.getSelectedRow(), eventList.getSelectedColumn()).toString();
         int row = eventList.getSelectedRow();
@@ -285,10 +289,6 @@ public class gui_Event extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_eventListMouseClicked
 
-    private void eventListPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_eventListPropertyChange
-
-    }//GEN-LAST:event_eventListPropertyChange
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
@@ -305,4 +305,11 @@ public class gui_Event extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * For Testing purposes
+     */
+    public JTable getEventList() {
+        return eventList;
+    }
 }
