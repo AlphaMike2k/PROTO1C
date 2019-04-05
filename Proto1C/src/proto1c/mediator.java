@@ -46,8 +46,8 @@ public class mediator {
      * Method triggered by user interacting with GUI, passed by GUI parent.
      * Instructs based on which button pressed.
      * @param button the button the user pressed given a string value
-     * @param val
-     * @param newRow
+     * @param val 
+     * @param newRow A type_TableRow object used to transport many variables as one object
      */
     public void buttonPressed(String button, int val, type_TableRow newRow) {
         switch (button) {

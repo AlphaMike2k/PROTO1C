@@ -6,19 +6,35 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
- * @author 
+ *  Class that controls operations and data relating to events
+ * @author 848130
  */
 public class manager_Event {
-    private final mediator mediatorParent;
+    private mediator mediatorParent = null;
     private final Connection dbConnection;
     
+    /**
+     * Constructor for testing
+     * @param conn The connection to the database
+     */
+    public manager_Event(Connection conn) {
+        dbConnection = conn;
+    }
     
+    /**
+     * Creates connection to parents
+     * @param mediator The mediator parent that creates class
+     * @param conn The connection to the database
+     */
     public manager_Event(mediator mediator, Connection conn) {
         mediatorParent = mediator;
         dbConnection = conn;
     }
     
+    /**
+     * Gets the events table from database
+     * @return ResultSet containing all the events
+     */
     public ResultSet getEvents() {
         try{
             Statement st = dbConnection.createStatement();
@@ -32,7 +48,10 @@ public class manager_Event {
         }
         return null;
     }
-    
+        /**
+         * Inserts new row in database
+         * @param row The row to insert (contains values needed)
+         */
         public void insertNewEvent(type_TableRow row) {
         try {
             Statement stmt = null;
@@ -46,6 +65,10 @@ public class manager_Event {
         }
     }
     
+        /**
+         * Deletes event from database
+         * @param row The row to delete
+         */
     public void deleteEvent(type_TableRow row) {
         try {
             Statement stmt = null;
@@ -59,6 +82,10 @@ public class manager_Event {
         }
     }
     
+        /**
+         * Updates event in database
+         * @param row The row to update (contains both old and new values)
+         */
      public void updateEvent (type_TableRow row) {
         try {
             Statement stmt = null;

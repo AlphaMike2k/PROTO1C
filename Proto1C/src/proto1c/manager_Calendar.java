@@ -3,18 +3,18 @@ import java.time.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
 /**
- *
+ * Class that manages dates and times
  * @author UP820734
  */
 public class manager_Calendar {
-    private static Calendar currentCalendar = Calendar.getInstance();
-    private static Calendar modCalendar = Calendar.getInstance();
+    private static final Calendar currentCalendar = Calendar.getInstance();
+    private static final Calendar modCalendar = Calendar.getInstance();
     private int guiMonth;
     private int guiYear;
-    private int currentDay;
-    private int currentMonth;
-    private int currentYear;
-    private SimpleDateFormat dayFormat = new SimpleDateFormat("u",Locale.getDefault());
+    private final int currentDay;
+    private final int currentMonth;
+    private final int currentYear;
+    private final SimpleDateFormat dayFormat = new SimpleDateFormat("u",Locale.getDefault());
     
     /**
      * Creates and controls all calendars and dates
@@ -28,9 +28,9 @@ public class manager_Calendar {
     }
     
     /**
-     * 
-     * @param month
-     * @return 
+     * Gets the number of days in a month
+     * @param month The month to return number of days
+     * @return Int value of number of days
      */
     public int getNumDays(int month) {
         YearMonth yearMonth = YearMonth.of(currentYear, month);
@@ -90,8 +90,8 @@ public class manager_Calendar {
     }
     
     /**
-     * 
-     * @return 
+     * Creates a LocalDate consisting of the system date
+     * @return The LocalDate of the system
      */
     public LocalDate getCurrentDate() {
         return LocalDate.of(currentYear,currentMonth,currentDay);

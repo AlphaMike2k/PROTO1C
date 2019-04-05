@@ -10,7 +10,7 @@ import static proto1c.Proto1C.conn;
 
 
 /**
- **Class that adds a new reminder.
+ **Class that controls reminders
  **@author UP875166
  */
 public class manager_Reminder {
@@ -23,16 +23,28 @@ public class manager_Reminder {
     private String reminderLocation;
     private String reminderDescription;
 
-    private final mediator mediatorParent;
+    private mediator mediatorParent = null;
     private final Connection dbConnection;
-
-    public manager_Reminder(mediator mediator, Connection conn) {
-	        mediatorParent = mediator;
-	        dbConnection = conn;
-	    }
-
+    
     /**
-         *
+     * Constructor for testing
+     * @param conn The connection to database
+     */
+    public manager_Reminder(Connection conn) {
+        dbConnection = conn;
+    }
+    
+    /**
+     * Constructor for initial creation
+     * @param mediator 
+     * @param conn 
+     */
+    public manager_Reminder(mediator mediator, Connection conn) {
+        mediatorParent = mediator;
+        dbConnection = conn;
+    }
+    /**
+         * Creates parents and required variables
          * @param name The name of the reminder.
          * @param day The day that the user selects for the reminder.
          * @param month The month that the user selects for the reminder.
@@ -59,7 +71,7 @@ public class manager_Reminder {
 
     /**
      * Method that formats the date and time of the reminder.
-     * @return
+     * @return Return string version of current date time
      */
     public static String getCurrentTimeStamp() {
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -69,72 +81,73 @@ public class manager_Reminder {
     }
     
     /**
-             * Method that returns the day that the reminder is set.
-             @return Returns remnderDay.
-             */
+    * Method that returns the day that the reminder is set.
+    *@return Returns remnderDay.
+    */
     public int getReminderDay() {
         return reminderDay;
     }
 
     /**
-         * Method that returns the month that the reminder is set.
-         @return Returns reminderMonth.
-         */
+    * Method that returns the month that the reminder is set.
+    *@return Returns reminderMonth.
+    */
     public int getReminderMonth() {
         return reminderMonth;
     }
 
     /**
-         * Method that returns the year that the reminder is set.
-         @return Returns reminderYear.
-         */
+    * Method that returns the year that the reminder is set.
+    *@return Returns reminderYear.
+    */
     public int getReminderYear() {
         return reminderYear;
     }
 
     /**
-         * Method that returns the hour that the reminder is set.
-         @return Returns reminderHour.
-         */
+    * Method that returns the hour that the reminder is set.
+    *@return Returns reminderHour.
+    */
     public int getReminderHour() {
         return reminderHour;
     }
     
     /**
-         * Method that returns the minute that the reminder is set.
-         @return Returns reminderMinute.
-         */
+    * Method that returns the minute that the reminder is set.
+    *@return Returns reminderMinute.
+    */
     public int getReminderMinute() {
         return reminderMinute;
     }
     
     /**
-         * Method that returns the name of the reminder.
-         @return Returns name.
-         */
+    * Method that returns the name of the reminder.
+    *@return Returns name.
+    */
     public String getReminderName(){
         return reminderName;
     }
 
     /**
-         * Method that returns the location of the reminder.
-         @return Returns location.
-         */
+    * Method that returns the location of the reminder.
+    *@return Returns location.
+    */
     public String getLocation(){
         return reminderLocation;
     }
 
     /**
-         * Method that returns the description of the reminder.
-         @return Returns description.
-         */
+    * Method that returns the description of the reminder.
+    *@return Returns description.
+    */
     public String getDescription(){
         return reminderDescription;
     }
 
     /**
-         * Method that gets data from the database.
-         */
+    * Method that gets data from the database.
+     * @return ResultSet containing all reminders
+    */
     public ResultSet getReminders() {
         try{
             Statement statement = dbConnection.createStatement();
@@ -150,8 +163,9 @@ public class manager_Reminder {
     }
 
     /**
-         * Method that inserts a new reminder.
-         */
+    * Method that inserts a new reminder.
+    * @param row The row to insert (contains all values required)
+    */
     public void insertNewReminder(type_TableRow row) {
             try {
                 Statement statement = null;
@@ -166,8 +180,9 @@ public class manager_Reminder {
         }
 
     /**
-         * Method that removes a reminder.
-         */
+    * Method that removes a reminder.
+    * @param row The row to remove (contains all values required)
+    */
     public void removeReminder(type_TableRow row) {
             try {
                 Statement statement = null;
@@ -181,7 +196,7 @@ public class manager_Reminder {
             }
         }
     
-    public void updateReminder(type_TableRow row){
+    //public void updateReminder(type_TableRow row){
         /*
         try {
                 Statement statement = null;
@@ -197,5 +212,5 @@ public class manager_Reminder {
                 se.printStackTrace();
             }
     */
-    }
+    //}
 }
